@@ -1,1 +1,501 @@
-/* You can add global styles to this file, and also import other style files */
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+div.no-wrap-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+div.builderTab {
+    padding-left: 15px;
+    padding-right: 35px;
+}
+h3.smallTopMargin {
+    margin-top: 10.5px;
+}
+spot-home > :last-child {
+    padding-top: 70px;
+}
+spot-artist-tile.large-tile > :first-child,
+spot-artist-results.large-tile > :first-child,
+div.large-tile  {
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+    margin-bottom: 0px;
+    width: 160px;
+}
+spot-artist-tile.large-tile > :first-child > :first-child,
+spot-artist-results.large-tile > :first-child > :first-child,
+div.large-tile > :first-child {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+
+spot-category-tile.large-tile > :first-child{
+    margin: 0px;
+    height: 150px;
+    width: 150px;
+    background: lightgray;
+}
+spot-category-tile.large-tile:hover > :first-child{
+    opacity: .75;
+}
+
+spot-artist-tile.small-tile > :first-child {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: 0px;
+    padding: 3px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+spot-artist-tile.small-tile > :first-child > :first-child {
+    display: flex;
+    margin: 0px;
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+}
+spot-artist-tile.small-tile > :first-child > h5:first-of-type {
+    font-weight: 500;
+
+}
+
+spot-artist-tile.small-tile > :first-child:hover{
+    background: rgb(221, 221, 221);
+    cursor: hand;
+
+}
+
+spot-artist-tile:hover, spot-album-tile:hover, spot-playlist-tile:hover {
+    background-color: #eeeeee;
+    cursor: hand;
+}
+
+li.spotnav.active{
+
+    border-bottom: 3px solid #4285f4;
+    color: #4285f4;
+    font-weight: bold;
+}
+li.spotnav {
+    display: inline-block;
+}
+
+img.nav-logo {
+    height: 40px;
+    width: auto;
+    margin-right: 50px;
+    margin-top: 5px;
+}
+
+spot-login > div:first-of-type {
+    background-image: url('/assets/images/kids.jpg');
+    opacity: .8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    color: white;
+    background-size: 100%;
+    height: 100%;
+}
+spot-login > div:first-of-type > :first-child {
+   margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+spot-navbar > div:first-of-type{
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 35px;
+}
+
+spot-search-field > input {
+    padding: 3px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+spot-results  {
+    display: flex;
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+spot-results > :first-child > :first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+spot-mymusic {
+    display: flex;
+    padding-left: 30px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+}
+spot-mymusic > :first-child{
+    width: 100%;
+}
+spot-mymusic > :last-child{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: 15px;
+    padding-left: 15px;
+    padding-right: 30px;
+    padding-top: 6px;
+    width: 500px;
+    background: linear-gradient( rgba(232, 232, 232, 0.81), white);
+}
+
+spot-browse {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding-right: 30px;
+}
+
+spot-categories-list {
+    display: flex;
+    background: lightgray;
+    flex-direction: column;
+}
+spot-categories-list > :first-child {
+    margin-top: 7px;
+}
+spot-browse > :first-child{
+    flex: 0 0 auto;
+    overflow-y: scroll;
+}
+
+spot-browse > :last-child {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 100%;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+h5.white-overlay {
+    position: relative;
+    bottom: 40px;
+    margin: 0px;
+    font-weight: 500;
+    color: white;
+}
+spot-artist {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+spot-playlist-banner > :first-child,
+spot-artist > :first-child {
+    display: flex;
+    margin-bottom: 15px;
+}
+spot-playlist-banner > :first-child > :first-child,
+spot-artist > :first-child > :first-child {
+    flex: 0 0 auto;
+}
+spot-playlist-banner > :first-child > :last-child,
+spot-artist > :first-child > :last-child {
+    flex-direction: column;
+    margin-left: 15px;
+    margin-top: -15px;
+}
+spot-artist > :last-child > :first-child{
+    margin-bottom: 5px;
+}
+spot-album {
+    display: flex;
+    margin-left: 30px;
+    margin-top: 25px;
+    margin-right: 30px;
+}
+spot-album > :first-child {
+    margin-right: 40px;
+    display: flex;
+    max-width: 500px;
+    flex-direction: column;
+    text-align: center;
+}
+
+spot-playlist{
+    display: inline-block;
+}
+spot-playlist > :first-child > :first-child {
+    transform: rotate(-90deg);
+    transform-origin-x: 130px;
+    transform-origin-y: 130px;
+    position: fixed;
+    text-align: end;
+}
+spot-playlist > :last-child {
+    margin-left: 125px;
+}
+
+spot-playlist-tile,
+spot-artist-tile,
+spot-album-tile {
+    flex: 0 0 auto;
+}
+
+spot-artist-tile  > * > * > img:first-of-type {
+    border-radius: 50%;
+}
+spot-playlist-tile  > * > * > img:first-of-type{
+    border-radius: 25%;
+}
+
+spot-album-list > :first-child >:first-child,
+spot-artist-list > :first-child,
+spot-playlist-list > :first-child {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+spot-playlist-list.horizontal > :first-child,
+spot-album-list.horizontal > :first-child > :first-child,
+spot-artist-list.horizontal > :first-child {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    padding-bottom: 5px;
+}
+
+/*
+workaround the different behaviour on search and browse (jumping view)
+*/
+spot-browse > * > * > spot-playlist-list.horizontal > :first-child,
+spot-browse > * > * > spot-album-list.horizontal > :first-child > :first-child
+{
+    padding-bottom: 15px;
+}
+spot-browse > * > * > hr {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+spot-playlist-list.horizontal:hover > :first-child,
+spot-album-list.horizontal:hover > :first-child > :first-child,
+spot-artist-list.horizontal:hover > :first-child {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0px;
+    margin-bottom: 15px;
+}
+
+spot-playlist-builder {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 100%;
+}
+spot-playlist-builder > :first-child {
+    flex: 0 0 300px;
+    overflow: hidden;
+    background: linear-gradient( rgba(232, 232, 232, 0.81), white);
+}
+spot-playlist-builder > :nth-child(2) {
+    flex: 1 0 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 15px;
+    border-right: lightgray;
+    border-right-style: solid;
+    border-right-width: 1px;
+    overflow: hidden;
+    align-self: stretch;
+}
+spot-playlist-builder > :nth-child(2):hover {
+    overflow-y: scroll;
+}
+
+spot-playlist-builder > :nth-child(2) > :last-child {
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 7px;
+}
+.drag-over {
+    border-style: solid;
+    border-color: #2780e3;
+    border-width: 2px;
+    background: rgba(232, 232, 232, 0.81);
+}
+
+spot-playlist-builder > :last-child{
+    flex: 0 0 500px;
+    overflow-y: scroll;
+}
+spot-playlist-builder > :last-child table {
+    margin-top: 10px;
+}
+spot-playlist-builder > * {
+    padding-top: 15px;
+}
+
+builder-recommendations > :first-child {
+    margin-top: 15px;
+}
+builder-recommendations > :first-child > :first-child.empty {
+    border: dashed;
+    border-color: darkgray;
+    padding: 10px;
+    text-align: center;
+}
+
+tr.clickable {
+    cursor: pointer;
+}
+.clickable:focus {
+    outline: 0;
+}
+.clickable:hover, .clickable.focused {
+    background-color: #ddf4fb !important;
+}
+
+.selected .link, .clickable:active .link {
+    color: #ffffff;
+}
+.selected, .clickable:active, .selected:active, .selected:hover, .selected:focus {
+    color: #ffffff !important;
+    background-color: #84bced !important;
+}
+
+[draggable]:hover {
+    cursor: move;
+    border: solid;
+    border-color: #2780e3;
+    border-width: 1px;
+    background: rgba(232, 232, 232, 0.81);
+    margin-top: -1px;
+    margin-bottom: 0px;
+}
+track-info{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    padding: 3px;
+}
+track-info > :first-child {
+    width: 100%;
+}
+track-info > :first-child > :first-child {
+    display: flex;
+    flex-direction: row;
+}
+track-info:hover > :first-child > :first-child > * > span.previewTrack {
+      visibility: visible;
+      border-radius: 50%;
+      color: green;
+  }
+track-info > :first-child > :nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+track-info > :first-child > :nth-child(2) > :first-child {
+    flex: 1 0 auto;
+    margin-right: 15px;
+    font-weight: 200
+}
+track-info > :first-child > :nth-child(2) > :last-child {
+    align-self: flex-end;
+    font-weight: 100;
+}
+
+div.includeRemove,
+td.includeRemove {
+    position: relative;
+    margin-bottom: 3px;
+}
+div.includeRemove{
+    padding-bottom: 0px;
+}
+div.includeRemove:hover,
+td.includeRemove:hover {
+    background: rgba(232, 232, 232, 0.81);
+}
+div.includeRemove:hover > span.removePlaylist,
+td.includeRemove:hover > span.removePlaylist {
+    visibility: visible;
+    border-radius: 50%;
+    font-size: 22px;
+    color: red;
+}
+
+div.builderFormItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+div.builderFormItem > :first-child {
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
+}
+div.builderFormItem > :nth-child(2){
+    width: 105px;
+}
+div.builderFormItem > :last-child {
+    height: 30px;
+    padding: 2px;
+    width: 50px
+}
+
+span.removePlaylist {
+    visibility: hidden;
+    position: absolute;
+    background: white;
+    top: -5px;
+    right: -5px;
+}
+span.removePlaylist:hover{
+    cursor: pointer;
+}
+
+span.previewTrack {
+    visibility: hidden;
+    background: white;
+    font-size:20px;
+}
+span.previewTrack:hover{
+    cursor: pointer;
+}
+
+span.pauseTrack {
+    background: white;
+    padding: 3px;
+    margin-bottom:2px;
+}
+span.pauseTrack:hover{
+    cursor: pointer;
+}
+nav-pills:hover {
+    cursor: pointer;
+}

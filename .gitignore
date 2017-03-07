@@ -30,6 +30,8 @@
 npm-debug.log
 testem.log
 /typings
+client-id.txt
+audioplayer.js
 
 # e2e
 /e2e/*.js
