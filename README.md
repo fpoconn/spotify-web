@@ -25,19 +25,23 @@ Uses Angular 2 (2.4.0) framework.  Features include:
 ## Build and run
 
 Prerequisites:
+
 * npm
 * angular CLI
 * spotify account
 
 Run 'npm install' to install required packages listed in package.json.
-Set up an app in the [spotify developer site](https://developer.spotify.com).  You'll need:
+
+Login to the [Spotify Developer site](https://developer.spotify.com) and create an Application.  This will supply the properties 
+needed for the spotify app:
 
 * client id
 * client secret
 * redirect URL
 
-(for now, copy these values into their respective properties in auth.service.ts.)
+(for now, copy these values into their respective properties in auth.service.ts.  hackish, i know.)
 
-Run 'ng build -bh /spotify --watch' (defaults to dev, sets baseref, watch for changes)
+Run 'ng build -bh /spotify --watch'
+(defaults to dev, sets basehref, watches for changes)
 
-Run 'lite-server'
+The build will output to the 'dist' directory, by default.  From here, run 'lite-server'
