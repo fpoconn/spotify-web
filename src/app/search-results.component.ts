@@ -99,10 +99,12 @@ export class SearchResultsComponent implements OnInit {
                 return this._searchService.search(str, null, 20);
             })
             .subscribe(
-                res => {
-                    this.searchResults = res;
-                    this.update();
-                },
+                res => 
+                    res.subscribe(res => {
+                        this.searchResults = res;
+                        this.update();
+                    })
+                ,
                 err => console.log("error: " + err),
                 () => console.log("Music loaded.")
             );
@@ -140,18 +142,17 @@ export class SearchResultsComponent implements OnInit {
 
         if(resEvent.s) {
 
-
             this._searchService.search(resEvent.s, null, 20)
                 .subscribe(
                     res => {
-                    this.searchResults = res;
-                    this.searchString = resEvent.s;
+                        this.searchResults = res;
+                        this.searchString = resEvent.s;
 
-                    this.update();
-                },
-                err => console.log("error: " + err),
+                        this.update();
+                    },
+                    err => console.log("error: " + err),
                     () => console.log("Music loaded.")
-                );
+                    );
         }
     }
 }

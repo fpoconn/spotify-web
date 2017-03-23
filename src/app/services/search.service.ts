@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {AuthService} from "./auth.service";
 
@@ -15,9 +15,7 @@ export class SearchService {
 
         if(searchStr) {
             return this._http.get('https://api.spotify.com/v1/search?type=' + localType + '&q=' + searchStr.trim().replace(' ', '+') + '&limit=' + localLimit)
-                .map(res => {
-                    return res.json();
-                });
+                .map(res => res.json());
         }
     }
 
@@ -26,18 +24,6 @@ export class SearchService {
 
         let searchURL = "https://api.spotify.com/v1/recommendations";
         let hasParams = false;
-
-        var access_token =  this._authService.getAccessToken();
-        var headers = new Headers();
-
-        if(access_token){
-
-            headers.append('Authorization', 'Bearer '+ access_token);
-        }
-        else{
-            console.log("NO ACCESS TOKEN");
-            return;
-        }
 
         if(searchModel.seedTrack && searchModel.seedArtist){
             searchURL = searchURL.concat('?seed_tracks=' + searchModel.seedTrack + '&seed_artists=' + searchModel.seedArtist);
@@ -66,9 +52,10 @@ export class SearchService {
         }
 
         if(hasParams) {
-
-            return this._http.get(searchURL,{headers: headers})
-                .map(res => res.json());
+            
+            return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+                    this._http.get(searchURL,{headers: headers})
+                .map(res => res.json()));
         }
         
     }

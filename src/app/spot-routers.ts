@@ -52,10 +52,8 @@ const spotRouters: Routes = [
                     albumResolve: AlbumComponentResolve
                 }
             },
-            { path: 'playlist/:ownerId/:id', component: PlaylistComponent,
-                resolve: {
-                    playlistResolve: PlaylistComponentResolve
-                }
+            { path: 'playlist/:ownerId/:id', component: PlaylistComponent
+                
             },
             { path: 'homeMyMusic', component: HomeMyMusicComponent,
                 children: [

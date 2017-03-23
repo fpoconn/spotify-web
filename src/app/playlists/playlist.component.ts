@@ -1,6 +1,8 @@
 import {Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, RouterModule} from '@angular/router';
 import {PlaylistService} from "../services/playlist.service";
+import 'rxjs/add/operator/mergeMap';
+
 
 @Component({
     selector: 'spot-playlist',
@@ -15,7 +17,6 @@ import {PlaylistService} from "../services/playlist.service";
     <div *ngIf="tracks">
         <table>
          <tr *ngFor="let track of tracks">
-            <td width="35px"><header>{{track.track.track_number}}.</header></td>
             <td><iframe width="500" height="80" [src]="track.track.id | sanitizeTrackUrl" 
                 frameborder="0" allowtransparency="true"></iframe></td>
          </tr>
@@ -37,20 +38,24 @@ export class PlaylistComponent implements OnInit {
 
 
     ngOnInit() {
-        // revert to this if the subscribe code breaks
-        this.playlist = this._activatedRoute.snapshot.data['playlistResolve'];
-       // this._activatedRoute.data.subscribe( data => {
-            
-         //   this.playlist = data.playlistResolve;
-             
-            this._playlistService.getTracks(this.playlist.tracks.href).subscribe(
 
-                result => {
-                    this.tracks = result.items;
-                }
-            )
-       // });
+        this._activatedRoute.params
+            .map(params => {
 
+                let ownerId = params['ownerId'];
+                let playlistId = params['id'];
+                return this._playlistService.playlistFromId(ownerId, playlistId);
+                   
+            }).subscribe( playlistObs => {
+
+                playlistObs.subscribe( playlist => {
+
+                    this.playlist = playlist;
+                    this._playlistService.getTracks(this.playlist.tracks.href)
+                        .subscribe( tracks => this.tracks = tracks.items);
+                });
+
+            });
     }
 
 

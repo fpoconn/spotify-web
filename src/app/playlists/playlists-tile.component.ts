@@ -24,7 +24,6 @@ export class PlaylistTileComponent{
 
     showPlaylist(){
         this._router.navigate(['../home/playlist', this.playlist.owner.id, this.playlist.id]);
-
     }
 
 }

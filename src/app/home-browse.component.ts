@@ -84,8 +84,8 @@ export class HomeBrowseComponent implements OnInit {
 
         this._userService.myPlaylists().subscribe(
             res => {
-                this.discoverPlaylist = res.items.find(item => item.owner.id === "spotifydiscover");
-                this.releaseRadarPlaylist = res.items.find(item => item.owner.id === "spotify");
+                this.discoverPlaylist = res.items.find(item => item.owner.id === "spotify" && item.name.includes("Discover"));
+                this.releaseRadarPlaylist = res.items.find(item => item.owner.id === "spotify" && item.name.includes("Radar"));
             },
             err => console.log("error: " + err),
             () => console.log("Discover playlist loaded ")

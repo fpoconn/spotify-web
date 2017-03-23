@@ -12,7 +12,6 @@ export class AlbumService {
             return this._http.get('https://api.spotify.com/v1/albums/' + id)
                 .map(res => res.json());
         }
-
     }
 
 }

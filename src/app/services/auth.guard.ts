@@ -15,10 +15,12 @@ export class AuthGuard implements CanActivate {
             return true;
         }
 
+        // access code comes from login 
         if(this.authService.getAccessCode()){
+
             return this.authService.retrieveAccessToken().map(data => {
-                this.authService.setAccessTokenData(data.json());
-                if(data){
+                if(data){       
+                    this.authService.setAccessTokenData(data.json());
                     return true;
                 }
                 else{
@@ -26,7 +28,6 @@ export class AuthGuard implements CanActivate {
                     this.router.navigate(['login']);
                     return false;
                 }
-
             });
         }
         else{

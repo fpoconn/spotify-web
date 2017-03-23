@@ -1,110 +1,54 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http} from '@angular/http';
 import {AuthService} from './auth.service';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
 export class UserService {
 
     constructor(private _http: Http, private _authService: AuthService) {}
 
-    getHeaders(){
-        var access_token =  this._authService.getAccessToken();
-        if(access_token) {
-
-            var headers = new Headers();
-
-            headers.append('Authorization', 'Bearer '+ access_token);
-
-            return headers;
-        }
-    }
-
     getUserInfo(){
-        
-        var headers = this.getHeaders();
 
-        if(headers) {
-            
-            return this._http.get('https://api.spotify.com/v1/me', {headers: headers})
-                .map(res => res.json());
-        }
-        else{
-            console.log("NO ACCESS TOKEN.  Could not retrieve User Info data.");
-        }
-
+        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+             this._http.get('https://api.spotify.com/v1/me', {headers: headers})
+                .map(res => res.json()));
     }
 
     followedArtists(){
 
-        var headers = this.getHeaders();
-
-        if(headers) {
-
-            return this._http.get('https://api.spotify.com/v1/me/following?type=artist', {headers: headers})
-                .map(res => res.json());
-        }
-        else{
-            console.log("NO ACCESS TOKEN.  Could not retrieve followed artists data.");
-        }
-
+        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+            this._http.get('https://api.spotify.com/v1/me/following?type=artist', {headers: headers})
+                .map(res => res.json()));
     }
 
     myPlaylists(){
 
-        var headers = this.getHeaders();
-
-        if(headers) {
-            return this._http.get('https://api.spotify.com/v1/me/playlists', {headers: headers})
-                .map(res => res.json());
-        }
-        else{
-            console.log("NO ACCESS TOKEN.  Could not retrieve my playlists data.");
-        }
-
+        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+            this._http.get('https://api.spotify.com/v1/me/playlists', {headers: headers})
+                .map(res => res.json()));
     }
 
     savedAlbums(){
 
-        var headers = this.getHeaders();
-
-        if(headers) {
-
-            return this._http.get('https://api.spotify.com/v1/me/albums', {headers: headers})
-                .map(res => res.json());
-        }
-        else{
-            console.log("NO ACCESS TOKEN.  Could not retrieve my albums data.");
-        }
-
+        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+            this._http.get('https://api.spotify.com/v1/me/albums', {headers: headers})
+                .map(res => res.json()));
     }
 
     savedTracks(){
 
-        var headers = this.getHeaders();
-
-        if(headers) {
-
-            return this._http.get('https://api.spotify.com/v1/me/tracks?limit=40', {headers: headers})
-                .map(res => res.json());
-        }
-        else{
-            console.log("NO ACCESS TOKEN.  Could not retrieve my tracks data.");
-        }
-
+        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+            this._http.get('https://api.spotify.com/v1/me/tracks?limit=40', {headers: headers})
+                .map(res => res.json()));
     }
 
     getTop(type: string, limit: number){
 
-        var headers = this.getHeaders();
-
-        if(headers) {
-            return this._http.get('https://api.spotify.com/v1/me/top/' + type + '?limit=' + limit, {headers: headers})
-                .map(res => res.json());
-        }
-        else{
-            console.log("NO ACCESS TOKEN.  Could not retrieve top " + type + " data.");
-        }
-
-    }
+        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+            this._http.get('https://api.spotify.com/v1/me/top/' + type + '?limit=' + limit, {headers: headers})
+                .map(res => res.json()));
+  }
 }

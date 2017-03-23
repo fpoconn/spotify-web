@@ -10,7 +10,7 @@ import {UserService} from "./services/user.service";
     template: `
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <a class="navbar-left" href="/spotify"><img src="/assets/images/Spotify_Logo_RGB_White.png" class="nav-logo" /></a>
+            <a class="navbar-left" routerLink="homeMyMusic"><img src="/assets/images/Spotify_Logo_RGB_White.png" class="nav-logo" /></a>
             
             <ul class="nav navbar-nav">
                <li [class.active]="selectedTab == 'myMusic'"><a routerLink="homeMyMusic" routerLinkActive="active" (click)="selectTab('myMusic')">My Music</a></li>
@@ -34,10 +34,12 @@ export class NavbarComponent {
     constructor(private _userService: UserService){}
 
     ngOnInit(){
+
         this._userService.getUserInfo().subscribe(res => {
 
             this.user = res;
-        });
+        },
+        err => console.log(err));
     }
 
     setResults(resEvent) {
