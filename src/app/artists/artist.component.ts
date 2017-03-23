@@ -46,13 +46,18 @@ export class ArtistComponent implements OnInit {
 
 
     ngOnInit() {
-        // revert to this if the subscribe code breaks
+    /*
+        snapshot only gives the current data, but we need to subscribe to notice changes,
+        otherwise, page will not update when changed from within since onInit will not fire again.
+        
         this.artist = this._activatedRoute.snapshot.data['artistResolve'];
-      // this._activatedRoute.data.subscribe( (data: ResolveData) => {
-       //    this.artist = data.artistResolve;
+    */
+
+       this._activatedRoute.data.subscribe( (data: ResolveData) => {
+            this.artist = data['artistResolve'];
            // reset tab to default tracks when data resolve updates
            this.selectedTab = 'tracks';
-      // });
+      });
 
     }
 
