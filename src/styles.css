@@ -189,6 +189,7 @@ spot-browse > :last-child {
     display: flex;
     flex-direction: column;
     flex: 0 1 100%;
+    min-height: 725px;
     margin-left: 10px;
     padding-left: 10px;
     padding-top: 15px;
@@ -203,6 +204,7 @@ h5.white-overlay {
 spot-artist {
     display: flex;
     flex-direction: column;
+    margin-top: 25px;
     margin-left: 30px;
     margin-right: 30px;
 }
@@ -240,6 +242,8 @@ spot-album > :first-child {
 
 spot-playlist{
     display: inline-block;
+    margin-top: 25px;
+
 }
 spot-playlist > :first-child > :first-child {
     transform: rotate(-90deg);
