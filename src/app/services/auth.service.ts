@@ -6,19 +6,20 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
 
     EXPIRED: string = "EXPIRED";
-    // set from the post, used by endpoints
-    access_token: string;
-    //not used yet
-    refresh_token: string;
 
-    tokenExpiry: number;
+   // refresh_token: string;
 
-    // set from the redirect
-    access_code: string;
+   // tokenExpiry: number;
     
+    /*
     client_id: string = 'CLIENT_ID';
     client_secret: string = 'CLIENT_SECRET';
     redirect_uri: string = "http://<host>:port/baseref";
+    */
+
+    client_id: string = 'fd072bd60ab94180812e3af983117800';
+    client_secret: string = 'aa7c347654774492ba1ee85cbfac8c38';
+    redirect_uri: string = "http://localhost:4200";
 
     token_url: string = 'https://accounts.spotify.com/api/token';
 
@@ -34,24 +35,35 @@ export class AuthService {
             '&redirect_uri=' + this.redirect_uri;
     }
 
+    clearTokenData(){
+
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("token_expiry");
+    }
+
     // access code returned from the url redirect
     setAccessCode(ourCode: string){
-        this.access_code = ourCode;
+        // this.access_code = ourCode;
+        localStorage.setItem("access_code", ourCode);
     }
     
     getAccessCode(){
-        return this.access_code;
+        //return this.access_code;
+        return localStorage.getItem("access_code");
     }
 
     setAccessTokenData(tokenJson: any){
 
        // expires in uses seconds 
-       this.tokenExpiry = Date.now() + (tokenJson.expires_in * 1000);
+        var tokenExpiry = Date.now() + (tokenJson.expires_in * 1000);
 
-        this.access_token = tokenJson.access_token;
+        localStorage.setItem("access_token", tokenJson.access_token);
+        localStorage.setItem("token_expiry", tokenExpiry.toString());
         // data return from refresh does not have new refresh token.  need to use original
         if  (tokenJson.refresh_token){
-            this.refresh_token = tokenJson.refresh_token;
+            localStorage.setItem("refresh_token", tokenJson.refresh_token);
+           // this.refresh_token = tokenJson.refresh_token;
         }
         this.scope = tokenJson.scope;
     
@@ -59,15 +71,19 @@ export class AuthService {
 
     // used by API endpoints for the headers
     getAccessToken(): string {
+        
+        let access_token = localStorage.getItem("access_token");
+        let tokenExpiry = localStorage.getItem("token_expiry");
 
-        if (this.tokenExpiry && this.access_token) {
+        if (tokenExpiry && access_token) {
             // EXPIRED TOKEN, REFRESH
-            if (Date.now() > this.tokenExpiry) {
+            if (Date.now() > parseInt(tokenExpiry)) {
+                console.log("EXPIRED!");
                 return this.EXPIRED; 
             }
         }
 
-        return this.access_token;
+        return access_token;
     }
 
     // header needed when using the token uri
@@ -110,7 +126,8 @@ export class AuthService {
     refreshAccessToken() {
 
         var headers = this.getAccessTokenHeaders();
-        var tokendata = 'grant_type=refresh_token&refresh_token=' + this.refresh_token;
+        var refreshToken = localStorage.getItem("refresh_token");
+        var tokendata = 'grant_type=refresh_token&refresh_token=' + refreshToken;
 
         return this._http.post(this.token_url, tokendata, {headers: headers});
     }
@@ -119,7 +136,8 @@ export class AuthService {
     retrieveAccessToken() {
 
         var headers = this.getAccessTokenHeaders();
-        var tokendata = 'code=' + this.access_code + '&grant_type=authorization_code&redirect_uri=' + this.redirect_uri;
+        var access_code = this.getAccessCode();
+        var tokendata = 'code=' + access_code + '&grant_type=authorization_code&redirect_uri=' + this.redirect_uri;
 
         return this._http.post(this.token_url, tokendata, {headers: headers});
     }

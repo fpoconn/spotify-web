@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {SanitizeTrackUrl} from "../pipes";
 import {UserService} from "../services/user.service";
 
@@ -21,13 +21,15 @@ import {UserService} from "../services/user.service";
     providers: [UserService]
 })
 
-export class SavedTracksComponent {
+export class SavedTracksComponent implements OnInit {
     // objects wrap a track and added time
     // access track with track.track
     savedTracks: any;
     savedTracksMessage: string = 'Loading saved tracks ...';
 
-    constructor(private _userService: UserService) {
+    constructor(private _userService: UserService) {}
+
+    ngOnInit(){
         
         this._userService.savedTracks().subscribe(
             res => {

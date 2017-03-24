@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {PlaylistListComponent} from "../playlists/playlist-list.compoenent";
 
@@ -15,13 +15,14 @@ import {PlaylistListComponent} from "../playlists/playlist-list.compoenent";
     providers: [UserService]
 })
 
-export class MyPlaylistsComponent {
+export class MyPlaylistsComponent implements OnInit {
 
     myPlaylists: any;
     playlistMessage: string = 'Loading playlists ...';
 
-    constructor(private _userService: UserService) {
-
+    constructor(private _userService: UserService) {}
+    
+    ngOnInit(){
         this._userService.myPlaylists().subscribe(
             res => {
                 this.myPlaylists = res.items;

@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 
 import {SearchComponent} from './search.component';
 
@@ -18,7 +18,7 @@ import {UserService} from "./services/user.service";
                <li [class.active]="selectedTab == 'playlistBuilder'"><a routerLink="playlistBuilder" (click)="selectTab('playlistBuilder')">Playlist Builder</a></li>
             </ul>
             
-            <p *ngIf="user" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span><a href="#" class="navbar-link">  {{user.id}}</a></p>
+            <p *ngIf="user" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span><a class="navbar-link" routerLink="../login">  {{user.id}}</a></p>
             <spot-search-field class="navbar-right" (resultEvent)="setResults($event)" [isNavBar]=true><span class="glyphicon glyphicon-user"></span></spot-search-field>
         </div>
     </div>
@@ -31,7 +31,7 @@ export class NavbarComponent {
     user: any;
     selectedTab: string = "myMusic";
 
-    constructor(private _userService: UserService){}
+    constructor(private _userService: UserService, private _router: Router){}
 
     ngOnInit(){
 
@@ -53,5 +53,12 @@ export class NavbarComponent {
 
     selectTab(tab){
         this.selectedTab = tab;
+    }
+
+    // temporary place for this.
+    logout(){
+
+       this._router.navigate(['login']);
+
     }
 }

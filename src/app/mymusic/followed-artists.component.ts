@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {ArtistListComponent} from "../artists/artist-list.component";
 
@@ -15,13 +15,14 @@ import {ArtistListComponent} from "../artists/artist-list.component";
     providers: [UserService]
 })
 
-export class FollowedArtistsComponent {
+export class FollowedArtistsComponent implements OnInit {
 
     followedArtists: any;
     followedArtistsMessage: string = 'Loading followed artists';
 
-    constructor(private _userService: UserService) {
+    constructor(private _userService: UserService) {}
 
+    ngOnInit(){
         this._userService.followedArtists().subscribe(
             res => {
                 this.followedArtists = res.artists.items;
@@ -29,8 +30,8 @@ export class FollowedArtistsComponent {
                     this.followedArtistsMessage = 'There are no artists to display.';
                 }
             },
-            err => console.log("error loading followed artists: " + err),
+            err => console.log("Error loading followed artists: " + err),
             () => console.log("Followed Artists loaded ")
-        );
+        );    
     }
 }

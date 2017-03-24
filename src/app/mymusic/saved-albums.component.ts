@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {AlbumListComponent} from '../albums/albums-list.component';
 import {UserService} from "../services/user.service";
 
@@ -15,12 +15,14 @@ import {UserService} from "../services/user.service";
     providers: [UserService]
 })
 
-export class SavedAlbumsComponent {
+export class SavedAlbumsComponent implements OnInit {
 
     savedAlbums: any;
     albumsMessage: string = 'Loading saved albums ... ';
 
-    constructor(private _userService: UserService) {
+    constructor(private _userService: UserService) {}
+
+    ngOnInit() {
         
         this._userService.savedAlbums().subscribe(
             res => {

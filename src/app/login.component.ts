@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {HttpModule} from '@angular/http';
 import {AuthService} from "./services/auth.service";
 
 @Component({
@@ -11,18 +9,16 @@ import {AuthService} from "./services/auth.service";
     <h1>Log in to Spotify</h1>    
     <button class = "btn btn-primary btn-lg" (click)="login()">Login</button>
     </div>
-    
     </div>
-    `,
-    providers: [HttpModule]
-
+    `
 })
-export class LoginComponent {
+export class LoginComponent{
 
-    constructor(private activatedRoute: ActivatedRoute, private _router: Router, private authService: AuthService){}
+    constructor(private authService: AuthService){}
 
     login() {
-
+        // from here to spotify auth URL, which redirects to home
+        this.authService.clearTokenData();
         window.location.href =  this.authService.getAuthorizeUrl();
 
     }

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {RouterModule, Router, ActivatedRoute} from '@angular/router';
+import {RouterModule, Router} from '@angular/router';
 import {HttpModule} from '@angular/http';
-import {NavbarComponent} from "./navbar.component";
 import {spotRouterProviders} from './spot-routers';
 import {AuthService} from "./services/auth.service";
 
@@ -11,11 +10,10 @@ import {AuthService} from "./services/auth.service";
     <router-outlet></router-outlet>
     `,
     providers: [HttpModule]
-
 })
 export class AppComponent {
     
-    constructor(private _router: Router, private activatedRoute: ActivatedRoute, private _authService: AuthService){}
+    constructor(private _router: Router, private _authService: AuthService){}
 
     ngOnInit() {
         
@@ -24,16 +22,13 @@ export class AppComponent {
         var extractedcode = href.split('=');
         var ourcode = extractedcode[1];
 
-        if (ourcode){
+        // go to either login, which directs to spotify URL then redirects back through this loop
+        // ... or goes to home where the auth guard will handle flow.
 
-                if (ourcode === undefined) {
-                    this._router.navigate(['login']);
-                }
-                else {
-                    this._authService.setAccessCode(ourcode);
-                    this._router.navigate(['home']);
+        if(ourcode){
 
-                }
+            this._authService.setAccessCode(ourcode);
+            this._router.navigate(['home']);
         }
     }
     
