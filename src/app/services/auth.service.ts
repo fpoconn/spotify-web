@@ -11,16 +11,11 @@ export class AuthService {
 
    // tokenExpiry: number;
     
-    /*
+    
     client_id: string = 'CLIENT_ID';
     client_secret: string = 'CLIENT_SECRET';
     redirect_uri: string = "http://<host>:port/baseref";
-    */
-
-    client_id: string = 'fd072bd60ab94180812e3af983117800';
-    client_secret: string = 'aa7c347654774492ba1ee85cbfac8c38';
-    redirect_uri: string = "http://localhost:4200";
-
+    
     token_url: string = 'https://accounts.spotify.com/api/token';
 
     scope: string = 'user-read-private playlist-read-private user-read-email user-library-read user-top-read user-follow-read';
