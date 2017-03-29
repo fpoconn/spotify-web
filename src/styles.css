@@ -19,6 +19,12 @@ h3.smallTopMargin {
 spot-home > :last-child {
     padding-top: 70px;
 }
+spot-artist-tile.large-tile:hover,
+spot-artist-results.large-tile:hover,
+spot-artist-tile.small-tile:hover,
+div.large-tile:hover{
+    cursor: pointer
+}
 spot-artist-tile.large-tile > :first-child,
 spot-artist-results.large-tile > :first-child,
 div.large-tile  {
@@ -78,9 +84,9 @@ spot-artist-tile.small-tile > :first-child:hover{
 
 }
 
-spot-artist-tile:hover, spot-album-tile:hover, spot-playlist-tile:hover {
+spot-artist-tile:hover, spot-album-tile:hover, spot-playlist-tile:hover, spot-playlist-banner > :first-child:hover {
     background-color: #eeeeee;
-    cursor: hand;
+    cursor: pointer;
 }
 
 li.spotnav.active{
@@ -212,6 +218,7 @@ spot-playlist-banner > :first-child,
 spot-artist > :first-child {
     display: flex;
     margin-bottom: 15px;
+    cursor: pointer
 }
 spot-playlist-banner > :first-child > :first-child,
 spot-artist > :first-child > :first-child {
@@ -481,6 +488,23 @@ span.removePlaylist {
 }
 span.removePlaylist:hover{
     cursor: pointer;
+}
+
+div.categoryListHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+}
+
+span.closePanel{
+    cursor: pointer;
+    font-size: 42px;
+    font-weight: 200;
+}
+span.closePanel:before{
+    content: '\00d7';
 }
 
 span.previewTrack {

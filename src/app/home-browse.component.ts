@@ -5,16 +5,18 @@ import {AlbumListComponent} from "./albums/albums-list.component";
 import {CategoryListComponent} from "./playlists/categories-list.component";
 import {UserService} from "./services/user.service";
 import {PlaylistBannerComponent} from "./playlists/playlist-banner.component";
+import {PlaylistTileComponent} from "./playlists/playlists-tile.component";
+
 
 @Component({
     selector: 'spot-browse',
     template: `
     <div *ngIf="categories">
-        <spot-categories-list [categories]="categories"></spot-categories-list>
+        <spot-categories-list [categories]="categories" (selectEvent)="setCategory($event)"></spot-categories-list>
     </div>
-    <div>
+    <div *ngIf="!category">
         <div style="display: flex; flex-direction: row">
-            <div *ngIf="discoverPlaylist">
+            <div *ngIf="discoverPlaylist" style="margin-left: 15px;">
                 <spot-playlist-banner [playlist]="discoverPlaylist" [description]="discoverDescription"></spot-playlist-banner>
             </div>
             <div *ngIf="releaseRadarPlaylist">
@@ -32,6 +34,14 @@ import {PlaylistBannerComponent} from "./playlists/playlist-banner.component";
             <spot-album-list class="horizontal" [albums]="newReleases"></spot-album-list>
         </div>
     </div>
+    <div *ngIf="category">
+         <div class="categoryListHeader">
+            <h3 style="margin-top: 10px;">{{category.name}}</h3>
+            <span class="closePanel" (click)="removeCategory()"></span>
+         </div>
+         <hr style="margin-top: 0px;">
+         <spot-playlist-list [playlists]="categoryPlaylists"></spot-playlist-list>
+    </div>
     `,
     providers: [BrowseService]
 
@@ -43,6 +53,8 @@ export class HomeBrowseComponent implements OnInit {
     featuredMessage: string = "Featured Playlists";
     newReleases: any;
     categories: any;
+    category: any;
+    categoryPlaylists: any;
     discoverPlaylist: any;
     discoverDescription: string = "Your weekly mixtape of fresh music.  " +
         "Enjoy new discoveries and deep cuts chosen just " +
@@ -91,6 +103,23 @@ export class HomeBrowseComponent implements OnInit {
             () => console.log("Discover playlist loaded ")
         );
 
+    }
+
+    setCategory(cat){
+        console.log("Category in browse: " + cat);
+        this.category = cat;
+        this._browseService.getCategoryPlaylists(cat.id).subscribe(
+            res => {
+                this.categoryPlaylists = res.playlists.items;
+            },
+            err => console.log("error: " + err),
+            () => console.log("Categories loaded ")
+        );
+
+    }
+
+    removeCategory(){
+        this.category = undefined;
     }
 
 }
