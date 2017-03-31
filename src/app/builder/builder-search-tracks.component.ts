@@ -6,17 +6,24 @@ import {DragDirective} from "../tools/drag-directive";
     selector: 'builder-search-tracks',
     template: `
         <div class="builderTab">
-            <spot-search-field (resultEvent)="setResults($event)" [searchString]="searchString"></spot-search-field>
-         
-             <table style="table-layout: fixed; width: 100%">
-                 <tr *ngFor="let track of tracks">
-                    <td>
+            <!--spot-search-field (resultEvent)="setResults($event)" [searchString]="searchString"></spot-search-field -->
+          <form (ngSubmit)="setResults()" #scanForm="ngForm" style="margin-top: 15px;">
+
+            <div style="display: flex; flex-direction: row">
+                    <input type="text" class="form-control" id="searchString" name="searchString" [(ngModel)]="searchString">
+                    <button type="submit" class="btn btn-default" [disabled]="disableForm">Search</button>
+                </div>
+         </form>
+
+        <table style="table-layout: fixed; width: 100%">
+             <tr class="alt-color" *ngFor="let track of tracks">
+                <td>
                     <div>
                         <track-info [myDraggable]="track" [track]="track"></track-info>
                     </div>
-                    </td>
-                 </tr>
-             </table>
+                </td>
+            </tr>
+        </table>
         </div>
     `,
     providers: [SearchService]
@@ -28,14 +35,14 @@ export class BuilderSearchTracks {
 
     constructor(private _searchService: SearchService){}
 
-    setResults(resEvent) {
+    setResults() {
 
-        if(resEvent) {
+     //   if(resEvent) {
 
-            this.searchString = resEvent.s;
+           // this.searchString = resEvent.s;
             sessionStorage['builderTrackSearchStr'] = this.searchString;
 
-            this._searchService.search(this.searchString, 'track', 20)
+            this._searchService.search("track:" + this.searchString, 'track', 20)
                 .subscribe(
                     res => {
                         this.tracks = res.tracks.items;
@@ -44,11 +51,12 @@ export class BuilderSearchTracks {
                     err => console.log("error: " + err),
                     () => console.log("Music loaded.")
                 );
-        }
+    //    }
     }
 
     ngOnInit(){
 
         this.searchString = sessionStorage['builderTrackSearchStr'] || 'Enter Search String';
+        console.log(this.searchString);
     }
 }

@@ -22,37 +22,37 @@ import {SearchService} from "../services/search.service";
                 <div style="display: flex; flex-direction: column;">
                     <div style="display: flex; flex-direction: row; justify-content: space-between">
                         <div class="form-group builderFormItem">
-                            <input type="checkbox" (change)="enableSearch()" class="form-control" id="includeAcousticness" name="includeAcousticness" [(ngModel)]="formModel.includeAcousticness">
+                            <input type="checkbox" class="form-control" id="includeAcousticness" name="includeAcousticness" [(ngModel)]="formModel.includeAcousticness">
                             <div>Accousticness</div>
-                            <input type="number" min="0" max="100" class="form-control" id="acousticness" name="acousticness" [(ngModel)]="formModel.acousticness">
+                            <input type="number" disabled={{!formModel.includeAcousticness}} min="0" max="100" class="form-control customNumber" id="acousticness" name="acousticness" [(ngModel)]="formModel.acousticness">
                         </div>
                         
                         <div class="form-group builderFormItem">
-                            <input type="checkbox" (change)="enableSearch()" class="form-control" id="includeDanceability" name="includeDanceability" [(ngModel)]="formModel.includeDanceability">
+                            <input type="checkbox" class="form-control" id="includeDanceability" name="includeDanceability" [(ngModel)]="formModel.includeDanceability">
                             <div>Danceability</div>
-                            <input type="number" min="0" max="100" class="form-control" id="danceability" name="danceability" [(ngModel)]="formModel.danceability">
+                            <input type="number" disabled={{!formModel.includeDanceability}} min="0" max="100" class="form-control customNumber" id="danceability" name="danceability" [(ngModel)]="formModel.danceability">
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: row; justify-content: space-between">
                         <div class="form-group builderFormItem">
-                            <input type="checkbox" (change)="enableSearch()" class="form-control" id="includeCheerfulness" name="includeCheerfulness" [(ngModel)]="formModel.includeCheerfulness">
+                            <input type="checkbox" class="form-control" id="includeCheerfulness" name="includeCheerfulness" [(ngModel)]="formModel.includeCheerfulness">
                             <div>Cheerfulness</div>
-                            <input type="number" min="0" max="100" class="form-control" id="cheerfulness" name="cheerfulness" [(ngModel)]="formModel.cheerfulness">
+                            <input type="number" disabled={{!formModel.includeCheerfulness}} min="0" max="100" class="form-control customNumber" id="cheerfulness" name="cheerfulness" [(ngModel)]="formModel.cheerfulness">
                         </div>
                         
                         <div class="form-group builderFormItem">
-                            <input type="checkbox" (change)="enableSearch()" class="form-control" id="includeLiveness" name="includeLiveness" [(ngModel)]="formModel.includeLiveness">
+                            <input type="checkbox" class="form-control" id="includeLiveness" name="includeLiveness" [(ngModel)]="formModel.includeLiveness">
                             <div>Live Venue</div>
-                            <input type="number" min="0" max="100" class="form-control" id="liveness" name="liveness" [(ngModel)]="formModel.liveness">
+                            <input type="number" disabled={{!formModel.includeLiveness}} min="0" max="100" class="form-control customNumber" id="liveness" name="liveness" [(ngModel)]="formModel.liveness">
                         </div>
                     </div>
                 </div>
                 
-                <button style="padding: 5px; horiz-align: right;" type="submit" class="btn btn-default" [disabled]="disableForm">Search</button>
+                <button type="submit" class="btn btn-default" [disabled]="disableForm">Search</button>
             </form>
             
              <table style="table-layout: fixed; width: 100%">
-                 <tr *ngFor="let track of tracks">
+                 <tr class="alt-color" *ngFor="let track of tracks">
                     <td>
                     <div>
                         <track-info [myDraggable]="track" [track]="track"></track-info>

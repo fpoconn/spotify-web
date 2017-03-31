@@ -22,8 +22,8 @@ import {DropDirective} from "../tools/drop-directive";
         
          <div id="playlistDroppable" myDroppable (dropped)="processDrop($event)">
          
-             <table style="table-layout: fixed; width: 100%">
-                 <tr *ngFor="let playlisttrack of selectedPlaylistTracks">
+             <table style="table-layout: fixed; width: 100%">                
+                 <tr class="alt-color" *ngFor="let playlisttrack of selectedPlaylistTracks">
                     <td class="includeRemove">
                         <track-info *ngIf="selectedTab != 'recommendations'" [track]="playlisttrack.track" ></track-info>
                         <track-info id="playlistDraggable" *ngIf="selectedTab == 'recommendations'" [track]="playlisttrack.track" [myDraggable]="playlisttrack.track" ></track-info>
