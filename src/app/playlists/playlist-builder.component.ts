@@ -17,9 +17,10 @@ import {DropDirective} from "../tools/drop-directive";
     </div>
     <div *ngIf="selectedPlaylist">
     
-        <h3 class="smallTopMargin" style="margin-bottom: 5px;">{{selectedPlaylist.name}}</h3>
-        {{selectedPlaylistTrackCount}} Tracks
-        
+        <div style="display: flex; flex-direction: row; align-items: baseline;"> 
+        <h3 class="smallTopMargin" style="margin-right: 15px;">{{selectedPlaylist.name}}</h3>  
+        <h5 style="font-weight: 300;"> {{selectedPlaylistTrackCount}} Tracks</h5>
+        </div>
          <div id="playlistDroppable" myDroppable (dropped)="processDrop($event)">
          
              <table style="table-layout: fixed; width: 100%">                
