@@ -6,7 +6,7 @@ import {SearchService} from "../services/search.service";
     template: `
         <div class="builderTab">
             <div *ngIf="!track" myDroppable (dropped)="processDrop($event)" class="empty">
-            Drag and drop playlist track here to find related tracks.
+                Drag and drop playlist track here to find related tracks.
             </div>
             
             <div *ngIf=track class="includeRemove" myDroppable (dropped)="processDrop($event)" style="padding: 5px;">
@@ -47,11 +47,10 @@ import {SearchService} from "../services/search.service";
                         </div>
                     </div>
                 </div>
-                
                 <button type="submit" class="btn btn-default" [disabled]="disableForm">Search</button>
             </form>
             
-             <table style="table-layout: fixed; width: 100%">
+             <table *ngIf="tracks" style="table-layout: fixed; width: 100%">
                  <tr class="alt-color" *ngFor="let track of tracks">
                     <td>
                     <div>
@@ -60,6 +59,13 @@ import {SearchService} from "../services/search.service";
                     </td>
                  </tr>
              </table>
+             <div *ngIf="!tracks" style="text-align: center; margin-top: 40px;">
+                <h5>1. Drop playlist track above to seed recommendations</h5>
+                <h5>2. Optionally set track attributes</h5>
+                <h5>3. Search</h5>
+                <h5>4. Drag tracks into selected playlist</h5>
+                <span class="glyphicon glyphicon-hand-left" style="font-size: 32px;"></span>
+            </div>
         
         </div>
     `
@@ -67,7 +73,7 @@ import {SearchService} from "../services/search.service";
 export class BuilderRecommendations {
 
     track: any;
-    tracks: any = [];
+    tracks: any;
     waiting: boolean = false;
     disableForm = true;
 

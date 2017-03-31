@@ -25,7 +25,7 @@ import {PlaylistService} from "../services/playlist.service";
             </form>
 
             <div *ngIf="waiting"><h4>Searching ...</h4></div>
-            <table *ngIf="!waiting" style="table-layout: fixed; width: 100%; margin-top: 15px;">
+            <table *ngIf="!waiting && tracks" style="table-layout: fixed; width: 100%; margin-top: 15px;">
                  <tr class="alt-color" *ngFor="let track of tracks">
                     <td>
                     <div>
@@ -34,13 +34,20 @@ import {PlaylistService} from "../services/playlist.service";
                     </td>
                  </tr>
              </table>
+              <div *ngIf="!tracks" style="text-align: center; margin-top: 40px;">
+                <h5>1. Select top N tracks from each playlist, and playlist count.</h5>
+                <h5>2. Enter search text used to find playlists.</h5>
+                <h5>3. Search</h5>
+                <h5>4. Drag tracks into selected playlist</h5>
+                <span class="glyphicon glyphicon-hand-left" style="font-size: 32px;"></span>
+            </div>
         </div>
     `
 
 })
 export class BuilderSearchPlaylists {
 
-    tracks: any = [];
+    tracks: any;
     waiting: boolean = false;
 
     formModel = {

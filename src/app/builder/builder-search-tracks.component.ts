@@ -15,7 +15,7 @@ import {DragDirective} from "../tools/drag-directive";
                 </div>
          </form>
 
-        <table style="table-layout: fixed; width: 100%">
+        <table *ngIf="tracks" style="table-layout: fixed; width: 100%">
              <tr class="alt-color" *ngFor="let track of tracks">
                 <td>
                     <div>
@@ -24,6 +24,10 @@ import {DragDirective} from "../tools/drag-directive";
                 </td>
             </tr>
         </table>
+         <div *ngIf="!tracks" style="text-align: center; margin-top: 40px;">
+                <h5>Search for tracks, then drag desired tracks into the selected playlist</h5>
+                <span class="glyphicon glyphicon-hand-left" style="font-size: 32px;"></span>
+            </div>
         </div>
     `,
     providers: [SearchService]
