@@ -64,9 +64,10 @@ export class PlaylistBuilderComponent  {
     constructor(private _playlistService: PlaylistService, private _userService: UserService,
                 private el: ElementRef, private renderer: Renderer) {
 
+        let userId = JSON.parse(localStorage.getItem("currentUser")).id;
         this._userService.myPlaylists().subscribe(
             res => {
-                this.playlists = res.items;
+                this.playlists = res.items.filter(pl => pl.owner.id === userId);
             },
             err => console.log("error loading my playlists: " + err)
         );

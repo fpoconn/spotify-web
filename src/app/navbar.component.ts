@@ -31,15 +31,10 @@ export class NavbarComponent {
     user: any;
     selectedTab: string = "myMusic";
 
-    constructor(private _userService: UserService, private _router: Router){}
+    constructor(private _router: Router){}
 
     ngOnInit(){
-
-        this._userService.getUserInfo().subscribe(res => {
-
-            this.user = res;
-        },
-        err => console.log(err));
+        this.user = JSON.parse(localStorage.getItem("currentUser"));
     }
 
     setResults(resEvent) {
@@ -57,7 +52,7 @@ export class NavbarComponent {
 
     // temporary place for this.
     logout(){
-
+        localStorage.removeItem("currentUser");
        this._router.navigate(['login']);
 
     }

@@ -10,7 +10,6 @@ import {UserService} from "../services/user.service";
          <tr *ngFor="let track of savedTracks">
             <td><iframe width="500" height="80" [src]="track.track.id | sanitizeTrackUrl" 
                 frameborder="0" allowtransparency="true"></iframe></td>
-               <td width="100px" align="center"><h4>{{track.track.popularity}}%</h4></td>
          </tr>
         </table>
     </div>

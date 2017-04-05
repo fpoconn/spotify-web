@@ -7,7 +7,7 @@ import 'rxjs/add/operator/mergeMap';
 @Component({
     selector: 'spot-playlist',
     template: `
-    <div *ngIf="playlist">
+    <div *ngIf="playlist" style="position: fixed;">
         <div>
             <h1>{{playlist.name}}</h1>  
                <h4>  {{playlist.tracks.total}} tracks </h4>

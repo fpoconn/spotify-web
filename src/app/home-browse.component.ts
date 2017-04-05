@@ -36,7 +36,7 @@ import {PlaylistTileComponent} from "./playlists/playlists-tile.component";
     </div>
     <div *ngIf="category">
          <div class="categoryListHeader">
-            <h3 style="margin-top: 10px;">{{category.name}}</h3>
+            <h2 style="margin-top: 10px;">{{category.name}}</h2>
             <span class="closePanel" (click)="removeCategory()"></span>
          </div>
          <hr style="margin-top: 0px;">

@@ -250,13 +250,14 @@ spot-album > :first-child {
 spot-playlist{
     display: inline-block;
     margin-top: 25px;
+    margin-left: 25px;
 
 }
 spot-playlist > :first-child > :first-child {
-    transform: rotate(-90deg);
-    transform-origin-x: 130px;
-    transform-origin-y: 130px;
-    position: fixed;
+    position: absolute;
+    transform: rotate(-90deg) translateX(-100%);
+    transform-origin: 0 0;
+    white-space: nowrap;
     text-align: end;
 }
 spot-playlist > :last-child {
