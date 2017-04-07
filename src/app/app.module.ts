@@ -53,6 +53,9 @@ import {SearchService} from "./services/search.service";
 import {NavbarComponent} from "./navbar.component";
 import {CategoryTileComponent} from "./playlists/category-tile.component";
 import {FormatGenres, SanitizeTrackUrl} from "./pipes";
+import {DialogComponent} from "./tools/dialog.component";
+import {DialogAction} from './tools/dialog.action';
+
 
 @NgModule({
     imports: [ BrowserModule, 
@@ -64,6 +67,7 @@ import {FormatGenres, SanitizeTrackUrl} from "./pipes";
     ,
     declarations: [
         ArtistProfileComponent,
+        DialogComponent,
         FormatGenres,
         SanitizeTrackUrl,
         NavbarComponent,
@@ -117,6 +121,8 @@ import {FormatGenres, SanitizeTrackUrl} from "./pipes";
         AlbumComponentResolve, 
         PlaylistComponentResolve,
         HttpModule],
+  entryComponents: [ DialogComponent ],
+
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

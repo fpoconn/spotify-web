@@ -61,6 +61,5 @@ export class BuilderSearchTracks {
     ngOnInit(){
 
         this.searchString = sessionStorage['builderTrackSearchStr'] || 'Enter Search String';
-        console.log(this.searchString);
     }
 }

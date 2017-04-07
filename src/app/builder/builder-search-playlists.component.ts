@@ -67,7 +67,6 @@ export class BuilderSearchPlaylists {
                 res => {
                     
                     res.playlists.items.forEach( playlist => {
-                        console.log("playlist name: " + playlist.name);
 
                         this._playlistService.getTracks(playlist.tracks.href).subscribe(
                             result => {
@@ -93,7 +92,6 @@ export class BuilderSearchPlaylists {
 
        let model = sessionStorage['scanPlaylistsModel'];
 
-        console.log(model);
         if(model){
             console.log("exists");
             this.formModel = JSON.parse(model);

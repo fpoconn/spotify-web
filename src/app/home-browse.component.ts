@@ -69,6 +69,12 @@ export class HomeBrowseComponent implements OnInit {
 
     ngOnInit(){
 
+        let storedCategory = localStorage.getItem("selectedCategory");
+        if(storedCategory){
+            this.category = JSON.parse(storedCategory);
+            this.loadCategoryPlaylists();
+        }
+
         this._browseService.getFeaturedPlaylists().subscribe(
             res => {
                 this.featuredPlaylists = res.playlists.items;
@@ -106,20 +112,27 @@ export class HomeBrowseComponent implements OnInit {
     }
 
     setCategory(cat){
-        console.log("Category in browse: " + cat);
+        
         this.category = cat;
-        this._browseService.getCategoryPlaylists(cat.id).subscribe(
+        localStorage.setItem("selectedCategory", JSON.stringify(cat));
+        this.loadCategoryPlaylists();
+
+    }
+
+    loadCategoryPlaylists(){
+
+        this._browseService.getCategoryPlaylists(this.category.id).subscribe(
             res => {
                 this.categoryPlaylists = res.playlists.items;
             },
             err => console.log("error: " + err),
             () => console.log("Categories loaded ")
         );
-
     }
 
     removeCategory(){
         this.category = undefined;
+        localStorage.removeItem("selectedCategory");
     }
 
 }

@@ -22,10 +22,17 @@ export class HomeMyMusicComponent {
     
     selectedTab: string = 'playlists';
 
-    constructor(){}
+    constructor(){
+        
+        let storedTab = localStorage.getItem("mymusicTab");
+        if(storedTab){
+            this.selectedTab = storedTab;
+        }
+    }
 
     selectTab(tabId){
 
         this.selectedTab = tabId;
+        localStorage.setItem("mymusicTab", tabId);
     }
 }

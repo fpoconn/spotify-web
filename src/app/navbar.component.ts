@@ -13,8 +13,8 @@ import {UserService} from "./services/user.service";
             <a class="navbar-left" routerLink="homeMyMusic"><img src="/assets/images/Spotify_Logo_RGB_White.png" class="nav-logo" /></a>
             
             <ul class="nav navbar-nav">
+                <li [class.active]="selectedTab == 'browse'"><a routerLink="homeBrowse" (click)="selectTab('browse')">Browse</a></li>
                <li [class.active]="selectedTab == 'myMusic'"><a routerLink="homeMyMusic" routerLinkActive="active" (click)="selectTab('myMusic')">My Music</a></li>
-               <li [class.active]="selectedTab == 'browse'"><a routerLink="homeBrowse" (click)="selectTab('browse')">Browse</a></li>
                <li [class.active]="selectedTab == 'playlistBuilder'"><a routerLink="playlistBuilder" (click)="selectTab('playlistBuilder')">Playlist Builder</a></li>
             </ul>
             
@@ -29,18 +29,23 @@ export class NavbarComponent {
     
     @Output() searchResultEvent = new EventEmitter();
     user: any;
-    selectedTab: string = "myMusic";
+    selectedTab: string = "browse";
 
     constructor(private _router: Router){}
 
     ngOnInit(){
+
         this.user = JSON.parse(localStorage.getItem("currentUser"));
+        let storedTab = localStorage.getItem("navbarTab");
+        if(storedTab){
+            this.selectedTab = storedTab;
+        }
+
     }
 
     setResults(resEvent) {
 
         if(resEvent) {
-
             this.searchResultEvent.emit(resEvent);
         }
         this.selectedTab = undefined;
@@ -48,12 +53,14 @@ export class NavbarComponent {
 
     selectTab(tab){
         this.selectedTab = tab;
+        localStorage.setItem("navbarTab", tab);
     }
 
     // temporary place for this.
     logout(){
         localStorage.removeItem("currentUser");
-       this._router.navigate(['login']);
+        this._router.navigate(['login']);
 
     }
+
 }

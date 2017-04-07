@@ -19,8 +19,7 @@ export class CategoryListComponent{
     constructor() {}
 
     selectCategory(category){
-        console.log("Category selected...");
-        console.log(category);
+
         this.selectEvent.emit(category);
 
     }

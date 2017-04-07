@@ -52,11 +52,16 @@ export class ArtistComponent implements OnInit {
         
         this.artist = this._activatedRoute.snapshot.data['artistResolve'];
     */
+        let storedTab = localStorage.getItem("artistTab");
+        if(storedTab){
+            this.selectedTab = storedTab;
+          //  this._router.navigate([storedTab]);
+        }
 
        this._activatedRoute.data.subscribe( (data: ResolveData) => {
             this.artist = data['artistResolve'];
            // reset tab to default tracks when data resolve updates
-           this.selectedTab = 'tracks';
+           //this.selectedTab = 'tracks';
       });
 
     }
@@ -64,6 +69,7 @@ export class ArtistComponent implements OnInit {
     selectTab(tabId){
 
         this.selectedTab = tabId;
+        localStorage.setItem("artistTab", tabId);
     }
 
 }
