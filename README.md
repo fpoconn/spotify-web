@@ -40,32 +40,21 @@ needed for the spotify app:
 * client_secret
 * redirect_uri
 
-(copy these values into their respective properties in auth.service.ts.  hackish, i know.)
+(copy these values into their respective properties in auth.service.ts and api.js.)
 
 > Note: redirect_uri should correspond to how you build and run the spotify app.
 
-### Build with Angular CLI, Run with lite-server
+### Build with Angular CLI, Run with Express
 
-The Spotify app has the lite-server port configured to 8080 but this can be changed in bs-config.json. 
+The Spotify app uses Express as a way to allow Cross-Origin requests.
 
-With a redirect URI of 'http://localhost:8080', you can simply run these 2 commands:
+With a redirect URI of 'http://localhost:4200', you can simply run these 2 commands:
 
 ```
 > ng build --watch  
-> cd dist
-> lite-server 
+> node server
 ```
 
 If redirect URI has a base href, for example 'http://localhost:8080/spotify', use the base href option.
 ```
 > ng build -bh /spotify --watch
-```
-
-### Serve with Angular CLI
-
-Alternatively, you can have angular CLI build (in memory) and server the app.
-
-Assuming a redirect URI of 'http://localhost:4200',  simply run:
-```
-> ng serve 
-```

@@ -46,9 +46,13 @@ div.large-tile > :first-child {
 
 spot-category-tile.large-tile > :first-child{
     margin: 0px;
-    height: 150px;
     width: 150px;
+    height: 150px;
     background: lightgray;
+}
+
+div.large-tile > :first-child > img:first-of-type {
+    width: 100%;
 }
 spot-category-tile.large-tile:hover > :first-child{
     opacity: .75;
@@ -73,15 +77,10 @@ spot-artist-tile.small-tile > :first-child > :first-child {
     height: 80px;
     margin-right: 15px;
 }
-spot-artist-tile.small-tile > :first-child > h5:first-of-type {
-    font-weight: 500;
-
-}
 
 spot-artist-tile.small-tile > :first-child:hover{
     background: rgb(221, 221, 221);
     cursor: hand;
-
 }
 
 spot-artist-tile:hover, spot-album-tile:hover, spot-playlist-tile:hover, spot-playlist-banner > :first-child:hover {
@@ -194,11 +193,12 @@ spot-browse > :first-child{
 spot-browse > :last-child {
     display: flex;
     flex-direction: column;
-    flex: 0 1 100%;
     min-height: 725px;
     margin-left: 10px;
     padding-left: 10px;
     padding-top: 15px;
+    width: 100%;
+    overflow-y: hidden;
 }
 h5.white-overlay {
     position: relative;
@@ -272,9 +272,11 @@ spot-album-tile {
 
 spot-artist-tile  > * > * > img:first-of-type {
     border-radius: 50%;
+    width: 100%;
 }
 spot-playlist-tile  > * > * > img:first-of-type{
     border-radius: 25%;
+    width: 100%;
 }
 
 spot-album-list > :first-child >:first-child,
@@ -332,7 +334,7 @@ spot-playlist-builder > :first-child {
 spot-playlist-builder > :nth-child(2) {
     flex: 1 0 0;
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 25px;
     margin-right: 15px;
     border-right: lightgray;
     border-right-style: solid;
@@ -342,6 +344,7 @@ spot-playlist-builder > :nth-child(2) {
 }
 spot-playlist-builder > :nth-child(2):hover {
     overflow-y: scroll;
+    padding-right: 10px;
 }
 
 spot-playlist-builder > :nth-child(2) > :last-child {
@@ -542,6 +545,7 @@ nav-pills:hover {
 .dialog {
     overflow: hidden;
     position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -550,7 +554,6 @@ nav-pills:hover {
 }
 .dialog-content{
     background: white;
-    z-index: 1;
     width: 300px;
     position: fixed;
     left: calc(50% - 125px);

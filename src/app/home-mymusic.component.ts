@@ -1,15 +1,16 @@
-import {Component } from '@angular/core';
+import {Component, ElementRef, ViewChild } from '@angular/core';
 import {MyTopItems} from "./mymusic/my-topitems.component";
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
     selector: 'spot-mymusic',
     template: `
     <div>
         <ul class="nav">
-            <li class="spotnav" [class.active]="selectedTab == 'playlists'"><a routerLink="myPlaylists" routerLinkActive="active" (click)="selectTab('playlists')">My Playlists</a></li>
-            <li class="spotnav" [class.active]="selectedTab == 'tracks'"><a routerLink="savedTracks" routerLinkActive="active" (click)="selectTab('tracks')">Saved Tracks</a></li>
-            <li class="spotnav" [class.active]="selectedTab == 'albums'"><a routerLink="savedAlbums" routerLinkActive="active" (click)="selectTab('albums')">Saved Albums</a></li>
-            <li class="spotnav" [class.active]="selectedTab == 'artists'"><a routerLink="followedArtists" routerLinkActive="active" (click)="selectTab('artists')">Followed Artists</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'playlists'"><a #playlists routerLink="myPlaylists" routerLinkActive="active" (click)="selectTab('playlists')">My Playlists</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'tracks'"><a #tracks routerLink="savedTracks" routerLinkActive="active" (click)="selectTab('tracks')">Saved Tracks</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'albums'"><a #albums routerLink="savedAlbums" routerLinkActive="active" (click)="selectTab('albums')">Saved Albums</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'artists'"><a #artists routerLink="followedArtists" routerLinkActive="active" (click)="selectTab('artists')">Followed Artists</a></li>
         </ul>
         <hr style="margin-top: 0px">
         <router-outlet></router-outlet> 
@@ -21,12 +22,31 @@ import {MyTopItems} from "./mymusic/my-topitems.component";
 export class HomeMyMusicComponent {
     
     selectedTab: string = 'playlists';
+    @ViewChild('playlists') playlists:ElementRef;
+    @ViewChild('tracks') tracks:ElementRef;
+    @ViewChild('albums') albums:ElementRef;
+    @ViewChild('artists') artists:ElementRef;
 
-    constructor(){
-        
+    constructor(private _router: Router){}
+
+    ngAfterViewInit(){
         let storedTab = localStorage.getItem("mymusicTab");
         if(storedTab){
+
             this.selectedTab = storedTab;
+
+            if(storedTab === 'playlists'){
+                this.playlists.nativeElement.click();
+            }
+            if(storedTab == 'tracks'){
+                this.tracks.nativeElement.click();
+            }
+            if(storedTab === 'albums'){
+                this.albums.nativeElement.click();
+            }
+            if(storedTab == 'artists'){
+                this.artists.nativeElement.click();
+            }
         }
     }
 
@@ -34,5 +54,7 @@ export class HomeMyMusicComponent {
 
         this.selectedTab = tabId;
         localStorage.setItem("mymusicTab", tabId);
+
     }
+
 }

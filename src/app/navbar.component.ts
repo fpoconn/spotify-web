@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, Output, Input, EventEmitter} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 
 import {SearchComponent} from './search.component';
@@ -10,15 +10,15 @@ import {UserService} from "./services/user.service";
     template: `
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <a class="navbar-left" routerLink="homeMyMusic"><img src="/assets/images/Spotify_Logo_RGB_White.png" class="nav-logo" /></a>
+            <a class="navbar-left"><img src="/assets/images/Spotify_Logo_RGB_White.png" class="nav-logo" /></a>
             
             <ul class="nav navbar-nav">
+                <li [class.active]="selectedTab == 'myMusic'"><a routerLink="homeMyMusic" routerLinkActive="active" (click)="selectTab('myMusic')">My Music</a></li>
                 <li [class.active]="selectedTab == 'browse'"><a routerLink="homeBrowse" (click)="selectTab('browse')">Browse</a></li>
-               <li [class.active]="selectedTab == 'myMusic'"><a routerLink="homeMyMusic" routerLinkActive="active" (click)="selectTab('myMusic')">My Music</a></li>
-               <li [class.active]="selectedTab == 'playlistBuilder'"><a routerLink="playlistBuilder" (click)="selectTab('playlistBuilder')">Playlist Builder</a></li>
+                <li [class.active]="selectedTab == 'playlistBuilder'"><a routerLink="playlistBuilder" (click)="selectTab('playlistBuilder')">Playlist Builder</a></li>
             </ul>
             
-            <p *ngIf="user" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span><a class="navbar-link" routerLink="../login">  {{user.id}}</a></p>
+            <p *ngIf="user" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span><a class="navbar-link" (click)="logout()">  {{user.id}}</a></p>
             <spot-search-field class="navbar-right" (resultEvent)="setResults($event)" [isNavBar]=true><span class="glyphicon glyphicon-user"></span></spot-search-field>
         </div>
     </div>
@@ -28,20 +28,11 @@ import {UserService} from "./services/user.service";
 export class NavbarComponent {
     
     @Output() searchResultEvent = new EventEmitter();
-    user: any;
-    selectedTab: string = "browse";
+    @Input() user: any;
+
+    selectedTab: string = "myMusic";
 
     constructor(private _router: Router){}
-
-    ngOnInit(){
-
-        this.user = JSON.parse(localStorage.getItem("currentUser"));
-        let storedTab = localStorage.getItem("navbarTab");
-        if(storedTab){
-            this.selectedTab = storedTab;
-        }
-
-    }
 
     setResults(resEvent) {
 
@@ -53,12 +44,11 @@ export class NavbarComponent {
 
     selectTab(tab){
         this.selectedTab = tab;
-        localStorage.setItem("navbarTab", tab);
     }
 
     // temporary place for this.
     logout(){
-        localStorage.removeItem("currentUser");
+        localStorage.clear();
         this._router.navigate(['login']);
 
     }

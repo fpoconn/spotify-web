@@ -42,9 +42,9 @@ import {DialogAction} from '../tools/dialog.action';
     </div>
     <div>
         <ul class="nav">
-            <li class="spotnav" [class.active]="selectedTab == 'trackSearch'"><a routerLink="builderTracks" (click)="selectTab('trackSearch')">Track Search</a></li>
-            <li class="spotnav" [class.active]="selectedTab == 'playlistSearch'"><a routerLink="builderPlaylists" (click)="selectTab('playlistSearch')">Scan Playlists</a></li>
-            <li class="spotnav" [class.active]="selectedTab == 'recommendations'"><a routerLink="builderRecommendations" (click)="selectTab('recommendations')">Recommendations</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'trackSearch'"><a #tracks routerLink="builderTracks" (click)="selectTab('trackSearch')">Track Search</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'playlistSearch'"><a #playlistsElement routerLink="builderPlaylists" (click)="selectTab('playlistSearch')">Scan Playlists</a></li>
+            <li class="spotnav" [class.active]="selectedTab == 'recommendations'"><a #recommendations routerLink="builderRecommendations" (click)="selectTab('recommendations')">Recommendations</a></li>
         </ul>
         <hr style="margin: 0px">
         <router-outlet></router-outlet> 
@@ -70,6 +70,10 @@ export class PlaylistBuilderComponent  {
     selectedPlaylistTracks: any;
     selectedPlaylistTrackCount: number;
 
+    @ViewChild('tracks') tracks:ElementRef;
+    @ViewChild('playlistsElement') playlistsElement:ElementRef;
+    @ViewChild('recommendations') recommendations:ElementRef;
+
     @ViewChild('dialogAnchor', {read: ViewContainerRef}) dialogAnchor: ViewContainerRef;
 
     constructor(private _playlistService: PlaylistService, private _userService: UserService,
@@ -78,17 +82,31 @@ export class PlaylistBuilderComponent  {
 
         let userId = JSON.parse(localStorage.getItem("currentUser")).id;
 
-        let storedTab = localStorage.getItem("builderTab");
-        if(storedTab){
-            this.selectedTab = storedTab;
-        }
-
         this._userService.myPlaylists().subscribe(
             res => {
                 this.playlists = res.items.filter(pl => pl.owner.id === userId);
             },
             err => console.log("error loading my playlists: " + err)
         );
+    }
+
+    ngAfterViewInit(){
+
+        let storedTab = localStorage.getItem("builderTab");
+        if(storedTab){
+            console.log("builder after view init: " + storedTab);
+            this.selectedTab = storedTab;
+
+            if(storedTab === 'playlistSearch'){
+                this.playlistsElement.nativeElement.click();
+            }
+            if(storedTab == 'trackSearch'){
+                this.tracks.nativeElement.click();
+            }
+            if(storedTab === 'recommendations'){
+                this.recommendations.nativeElement.click();
+            }
+        }
     }
     
     selectTab(tabId){

@@ -7,21 +7,14 @@ export class AuthService {
 
     EXPIRED: string = "EXPIRED";
 
-   // refresh_token: string;
-
-   // tokenExpiry: number;
-    
-    
     client_id: string = 'CLIENT_ID';
-    client_secret: string = 'CLIENT_SECRET';
-    redirect_uri: string = "http://<host>:port/baseref";
-    
+    redirect_uri: string = "http://localhost:4200";
+
     token_url: string = 'https://accounts.spotify.com/api/token';
 
     scope: string = 'user-read-private playlist-read-private user-read-email user-library-read user-top-read user-follow-read';
     
     constructor(private _http: Http) {}
-
     getAuthorizeUrl(){
         return 'https://accounts.spotify.com/authorize?' +
             'response_type=code' +
@@ -49,7 +42,6 @@ export class AuthService {
     }
 
     setAccessTokenData(tokenJson: any){
-
        // expires in uses seconds 
         var tokenExpiry = Date.now() + (tokenJson.expires_in * 1000);
 
@@ -81,19 +73,6 @@ export class AuthService {
         return access_token;
     }
 
-    // header needed when using the token uri
-    getAccessTokenHeaders(){
-
-        var basicheader = btoa(this.client_id + ':' + this.client_secret);
-
-        var headers = new Headers();
-
-        headers.append('Authorization', 'Basic '+ basicheader);
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
-        return headers;
-    }
-
     // return observable because the header might need a refreshed access_token
     getEndPointHeaders() {
 
@@ -105,6 +84,7 @@ export class AuthService {
                 var headers = new Headers();
                 var token = this.getAccessToken();
                 headers.append('Authorization', 'Bearer '+ token);
+
                 return headers;
             });
         }
@@ -120,21 +100,38 @@ export class AuthService {
     // used by to get a  refreshed token after expiry
     refreshAccessToken() {
 
-        var headers = this.getAccessTokenHeaders();
         var refreshToken = localStorage.getItem("refresh_token");
-        var tokendata = 'grant_type=refresh_token&refresh_token=' + refreshToken;
+        
+        // Direct call caused CORS issue.  Use express endpoint.
+        // var headers = this.getAccessTokenHeaders();
+        // var tokendata = 'grant_type=refresh_token&refresh_token=' + refreshToken;
+        // return this._http.post(this.token_url, tokendata, {headers: headers});
 
-        return this._http.post(this.token_url, tokendata, {headers: headers});
+       var form = {
+            refresh_token: refreshToken,
+            grant_type: 'refresh_token'
+        };
+
+        return this._http.post('/api/token', form);
     }
     
     // auth guard will use the results to set the access token data
     retrieveAccessToken() {
 
-        var headers = this.getAccessTokenHeaders();
         var access_code = this.getAccessCode();
-        var tokendata = 'code=' + access_code + '&grant_type=authorization_code&redirect_uri=' + this.redirect_uri;
 
-        return this._http.post(this.token_url, tokendata, {headers: headers});
+        // Direct call caused CORS issue.  Use express endpoint.
+        // var headers = this.getAccessTokenHeaders();
+        //var tokendata = 'code=' + access_code + '&grant_type=authorization_code&redirect_uri=' + this.redirect_uri;
+        //return this._http.post(this.token_url, tokendata, {headers: headers});
+
+        var form = {
+            code: access_code,
+            redirect_uri: this.redirect_uri,
+            grant_type: 'authorization_code'
+        };
+
+        return this._http.post('/api/token', form);
     }
 
 }

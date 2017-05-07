@@ -5,18 +5,19 @@ import {UserService} from './services/user.service';
 @Component({
     selector: 'spot-home',
     template: `
-    <spot-navbar (searchResultEvent)="setResults($event)"></spot-navbar>
+    <spot-navbar [user]="currentUser" (searchResultEvent)="setResults($event)"></spot-navbar>
     <router-outlet></router-outlet>
     `
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-    constructor(private _router: Router, private _userService: UserService){}
+    currentUser: any;
 
-    ngOnInit(){
+    constructor(private _router: Router, private _userService: UserService){
 
-        this._userService.getUserInfo().subscribe(res => {
+         this._userService.getUserInfo().subscribe(res => {
+            this.currentUser = res;
             localStorage.setItem("currentUser", JSON.stringify(res));
         },
         err => console.log(err));
