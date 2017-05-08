@@ -18,7 +18,6 @@ import {PlaylistListComponent} from "./playlists/playlist-list.compoenent";
             <div>
                 <ul class="nav nav-pills">
                     <li class="nav" [class.active]="selectedPill == 'all'"><a (click)="selectPill('all')">All</a></li>
-                    <li class="disabled" [class.active]="selectedPill == 'tracks'"><a (click)="selectPill('tracks')">Tracks</a></li>
                     <li class="nav" [class.active]="selectedPill == 'artists'"><a (click)="selectPill('artists')">Artists</a></li>
                     <li class="nav" [class.active]="selectedPill == 'albums'"><a (click)="selectPill('albums')">Albums</a></li>
                     <li class="nav" [class.active]="selectedPill == 'playlists'"><a (click)="selectPill('playlists')">Playlists</a></li>
