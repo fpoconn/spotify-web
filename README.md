@@ -48,13 +48,14 @@ needed for the spotify app:
 
 The Spotify app uses Express as a way to allow Cross-Origin requests.
 
-With a redirect URI of 'http://localhost:4200', you can simply run these 2 commands:
+With a redirect URI of 'http://localhost:4200', simply run these commands after cloning the repositor:
 
 ```
+> npm install
 > ng build --watch  
 > node server
 ```
 
-If redirect URI has a base href, for example 'http://localhost:8080/spotify', use the base href option.
+If redirect URI includes a base href, for example 'http://localhost:8080/spotify', use the base href option.
 ```
 > ng build -bh /spotify --watch
