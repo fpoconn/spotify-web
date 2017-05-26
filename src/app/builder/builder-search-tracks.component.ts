@@ -41,21 +41,19 @@ export class BuilderSearchTracks {
 
     setResults() {
 
-     //   if(resEvent) {
 
-           // this.searchString = resEvent.s;
-            sessionStorage['builderTrackSearchStr'] = this.searchString;
+        sessionStorage['builderTrackSearchStr'] = this.searchString;
 
-            this._searchService.search("track:" + this.searchString, 'track', 20)
-                .subscribe(
-                    res => {
-                        this.tracks = res.tracks.items;
+        this._searchService.search("track:" + this.searchString, 'track', 20)
+            .subscribe(
+                res => {
+                    this.tracks = res.tracks.items;
 
-                    },
-                    err => console.log("error: " + err),
-                    () => console.log("Music loaded.")
-                );
-    //    }
+                },
+                err => console.log("error: " + err),
+                () => console.log("Music loaded.")
+            );
+
     }
 
     ngOnInit(){

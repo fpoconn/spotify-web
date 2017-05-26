@@ -119,7 +119,7 @@ export class PlaylistBuilderComponent  {
         this.selectedPlaylist = playlist;
         this.selectedPlaylistId = playlist.id;
         this.getPlaylistTracks();
-        sessionStorage['builderSelectedPlaylist'] = JSON.stringify(this.selectedPlaylist);
+        localStorage['builderSelectedPlaylist'] = JSON.stringify(this.selectedPlaylist);
 
     }
     
@@ -134,7 +134,7 @@ export class PlaylistBuilderComponent  {
     }
     ngOnInit(){
 
-        let storedPlaylist = sessionStorage['builderSelectedPlaylist'];
+        let storedPlaylist = localStorage['builderSelectedPlaylist'];
         if(storedPlaylist) {
             this.selectedPlaylist = JSON.parse(storedPlaylist);
             this.selectedPlaylistId = this.selectedPlaylist.id;
