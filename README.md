@@ -19,7 +19,7 @@ Uses Angular 2 (2.4.0) framework.  Features include:
 * angular services
 * angular with Oath2
 * Route resolves (Resolve) to ensure data has loaded before page is displayed
-* Route guards (CanActivate) to ensure page is not displayed without permission
+* Route guards (CanActivate) to ensure page is displayed with permission
 * custom Pipes
 * http get and post
 
@@ -48,7 +48,9 @@ needed for the spotify app:
 
 The Spotify app uses Express as a way to allow Cross-Origin requests.
 
-With a redirect URI of 'http://localhost:4200', simply run these commands after cloning the repositor:
+With a redirect URI of 'http://localhost:4200', simply run these commands after cloning the repository:
+
+(before building, copy the spotify id and secret into the auth service and api.js)
 
 ```
 > npm install
