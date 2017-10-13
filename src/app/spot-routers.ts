@@ -41,16 +41,10 @@ const spotRouters: Routes = [
                     {path: 'tracks', component: RelatedTracksComponent},
                     {path: 'albums', component: RelatedAlbumsComponent},
                     {path: 'relatedArtists', component: RelatedArtistsComponent}
-                ],
-                resolve: {
-                    artistResolve: ArtistComponentResolve
-                }
+                ]
             },
             {
-                path: 'album/:id', component: AlbumComponent,
-                resolve: {
-                    albumResolve: AlbumComponentResolve
-                }
+                path: 'album/:id', component: AlbumComponent
             },
             { path: 'playlist/:ownerId/:id', component: PlaylistComponent
                 

@@ -14,8 +14,10 @@ export class SearchService {
         let localType = type ? type : 'artist,track,album,playlist';
 
         if(searchStr) {
-            return this._http.get('https://api.spotify.com/v1/search?type=' + localType + '&q=' + searchStr.trim().replace(' ', '+') + '&limit=' + localLimit)
-                .map(res => res.json());
+            return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+                 this._http.get('https://api.spotify.com/v1/search?type=' + localType + '&q=' + searchStr.trim().replace(' ', '+') + '&limit=' + localLimit, 
+                    {headers: headers})
+                        .map(res => res.json()));
         }
     }
 

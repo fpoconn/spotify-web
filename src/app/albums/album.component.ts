@@ -41,8 +41,19 @@ export class AlbumComponent implements OnInit {
 
     ngOnInit() {
 
-        this.album = this._activatedRoute.snapshot.data['albumResolve'];
-        this.artist = this.album.artists[0];
+        this._activatedRoute.params.map( data => {
+
+            return this._albumService.albumFromId(data['id']);
+            
+        }).subscribe( albumObs => {
+            albumObs.subscribe(album => {
+
+                this.album = album;
+                this.artist = this.album.artists[0];
+
+            });
+
+        });
 
     }
     

@@ -30,7 +30,6 @@ export class RelatedArtistsComponent {
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private _artistService: ArtistService) {
 
-        //this.sub = this._router.routerState.parent(this._activatedRoute).params.subscribe(params => {
         this.sub = this._activatedRoute.parent.params.subscribe(params => {
             this.artistId = params['id'];
 
@@ -43,7 +42,6 @@ export class RelatedArtistsComponent {
                     err => console.log("error: " + err),
                     () => console.log("Related Artists loaded.")
                 );
-
             }
 
         });

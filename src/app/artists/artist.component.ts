@@ -46,6 +46,7 @@ export class ArtistComponent implements OnInit {
 
 
     ngOnInit() {
+
     /*
         snapshot only gives the current data, but we need to subscribe to notice changes,
         otherwise, page will not update when changed from within since onInit will not fire again.
@@ -55,14 +56,17 @@ export class ArtistComponent implements OnInit {
         let storedTab = localStorage.getItem("artistTab");
         if(storedTab){
             this.selectedTab = storedTab;
-          //  this._router.navigate([storedTab]);
         }
 
-       this._activatedRoute.data.subscribe( (data: ResolveData) => {
-            this.artist = data['artistResolve'];
-           // reset tab to default tracks when data resolve updates
-           //this.selectedTab = 'tracks';
-      });
+            this._activatedRoute.params.map( data => {
+                return this._artistService.artistFromId(data['id']);
+            }).subscribe( artistObs => {
+                artistObs.subscribe(artist => {
+                    this.artist = artist;
+
+                });
+
+            });
 
     }
 

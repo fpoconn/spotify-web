@@ -9,8 +9,11 @@ export class ArtistComponentResolve implements Resolve<any> {
     constructor(private artistService: ArtistService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
-
         let id = route.params['id'];
+        console.log("Artist Resolve: ");
+
+        console.log(this.artistService.artistFromId(id));
+
         return this.artistService.artistFromId(id);
         
     }

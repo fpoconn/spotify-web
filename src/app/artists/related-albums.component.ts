@@ -30,22 +30,24 @@ export class RelatedAlbumsComponent {
 
     constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private _artistService: ArtistService) {
 
-       // this.sub = this._router.routerState.parent(this._activatedRoute).params.subscribe(params => {
         this.sub = this._activatedRoute.parent.params.subscribe(params => {
+
             this.artistId = params['id'];
 
             if (this.artistId) {
 
-                this._artistService.artistAlbums(this.artistId).subscribe(
-                    res => {
-                        this.relatedAlbums = res.items;
-                    },
-                    err => console.log("error: " + err),
-                    () => console.log("Artist Tracks loaded.")
-                );
+                this._artistService.artistAlbums(this.artistId).subscribe( res => {
 
+                   // albumsObs.subscribe(res => {
+                            this.relatedAlbums = res.items;
+                        },
+                        err => console.log("error loading related albums: " + err),
+                        () => console.log("Artist Tracks loaded.")
+                    )
+
+               // });
             }
-
+            
         });
     }
 
