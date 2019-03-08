@@ -5,7 +5,7 @@ import {UserService} from "../services/user.service";
 @Component({
     selector: 'spot-saved-tracks',
     template: `
-    <div *ngIf="savedTracks">
+    <div *ngIf="savedTracks && savedTracks.length > 0; else loading">
         <table>
          <tr *ngFor="let track of savedTracks">
             <td><iframe width="500" height="80" [src]="track.track.id | sanitizeTrackUrl" 
@@ -13,9 +13,9 @@ import {UserService} from "../services/user.service";
          </tr>
         </table>
     </div>
-    <div *ngIf="!savedTracks || savedTracks.length === 0">
+    <ng-template #loading>
         {{savedTracksMessage}}
-    </div>
+    </ng-template>
     `,
     providers: [UserService]
 })
@@ -24,7 +24,7 @@ export class SavedTracksComponent implements OnInit {
     // objects wrap a track and added time
     // access track with track.track
     savedTracks: any;
-    savedTracksMessage: string = 'Loading saved tracks ...';
+    savedTracksMessage: string = 'Loading Saved Tracks ...';
 
     constructor(private _userService: UserService) {}
 

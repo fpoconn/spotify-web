@@ -5,12 +5,10 @@ import {UserService} from "../services/user.service";
 @Component({
     selector: 'spot-saved-albums',
     template: `
-    <div *ngIf="savedAlbums">
+    <div *ngIf="savedAlbums && savedAlbums.length > 0; else loading">
          <spot-album-list [albums]="savedAlbums" [isWrapped]=true></spot-album-list>
     </div>
-    <div *ngIf="!savedAlbums || savedAlbums.length === 0">
-        {{albumsMessage}}    
-    </div>
+    <ng-template #loading>{{albumsMessage}}</ng-template>
     `,
     providers: [UserService]
 })
@@ -18,7 +16,7 @@ import {UserService} from "../services/user.service";
 export class SavedAlbumsComponent implements OnInit {
 
     savedAlbums: any;
-    albumsMessage: string = 'Loading saved albums ... ';
+    albumsMessage: string = 'Loading Saved Albums ... ';
 
     constructor(private _userService: UserService) {}
 

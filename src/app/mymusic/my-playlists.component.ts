@@ -5,12 +5,12 @@ import {PlaylistListComponent} from "../playlists/playlist-list.compoenent";
 @Component({
     selector: 'spot-my-playlists',
     template: `
-    <div *ngIf="myPlaylists">
+    <div *ngIf="myPlaylists && myPlaylists.length > 0; else loading">
          <spot-playlist-list [playlists]="myPlaylists"></spot-playlist-list>
     </div>
-    <div *ngIf="!myPlaylists || myPlaylists.length === 0">
+    <ng-template #loading>
         {{playlistMessage}}
-    </div>
+    </ng-template>
     `,
     providers: [UserService]
 })
@@ -18,7 +18,7 @@ import {PlaylistListComponent} from "../playlists/playlist-list.compoenent";
 export class MyPlaylistsComponent implements OnInit {
 
     myPlaylists: any;
-    playlistMessage: string = 'Loading playlists ...';
+    playlistMessage: string = 'Loading Playlists ...';
 
     constructor(private _userService: UserService) {}
     

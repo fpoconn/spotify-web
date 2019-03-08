@@ -5,12 +5,12 @@ import {ArtistListComponent} from "../artists/artist-list.component";
 @Component({
     selector: 'spot-followed-artists',
     template: `
-    <div *ngIf="followedArtists">
+    <div *ngIf="followedArtists && followedArtists.length > 0">
          <spot-artist-list [artists]="followedArtists"></spot-artist-list>
     </div>
-    <div *ngIf="!followedArtists || followedArtists.length === 0">
+    <ng-template>
         {{followedArtistsMessage}}
-    </div>
+    </ng-template>
     `,
     providers: [UserService]
 })
@@ -18,7 +18,7 @@ import {ArtistListComponent} from "../artists/artist-list.component";
 export class FollowedArtistsComponent implements OnInit {
 
     followedArtists: any;
-    followedArtistsMessage: string = 'Loading followed artists';
+    followedArtistsMessage: string = 'Loading Followed Artists ...';
 
     constructor(private _userService: UserService) {}
 
