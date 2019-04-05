@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule} from  '@angular/http';
+import { HttpClientModule } from  '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent}  from './app.component';
@@ -61,9 +61,10 @@ import {DialogAction} from './tools/dialog.action';
     imports: [ BrowserModule, 
         FormsModule, 
         RouterModule,
-        HttpModule,
+        HttpClientModule,
         ReactiveFormsModule, 
-        routing ]
+        routing
+    ]
     ,
     declarations: [
         ArtistProfileComponent,
@@ -104,9 +105,8 @@ import {DialogAction} from './tools/dialog.action';
         PlaylistBannerComponent,
         DragDirective,
         DropDirective,
-        ArtistListComponent
-        
-    ],
+        ArtistListComponent]
+    ,
     providers: [
         spotRouterProviders, 
         ArtistService, 
@@ -120,9 +120,12 @@ import {DialogAction} from './tools/dialog.action';
         ArtistComponentResolve, 
         AlbumComponentResolve, 
         PlaylistComponentResolve,
-        HttpModule],
-  entryComponents: [ DialogComponent ],
-
-    bootstrap:    [ AppComponent ]
+        HttpClientModule]
+    ,
+    entryComponents: [ 
+        DialogComponent]
+    ,
+    bootstrap: [ 
+        AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterModule, Router} from '@angular/router';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {spotRouterProviders} from './spot-routers';
 import {AuthService} from "./services/auth.service";
 
@@ -9,7 +9,7 @@ import {AuthService} from "./services/auth.service";
     template: `
     <router-outlet></router-outlet>
     `,
-    providers: [HttpModule]
+    providers: [HttpClientModule]
 })
 export class AppComponent {
     

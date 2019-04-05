@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {AuthService} from "./auth.service";
 
 @Injectable()
 export class SearchService {
 
-    constructor(private _http: Http, private _authService: AuthService) {}
+    constructor(private _http: HttpClient, private _authService: AuthService) {}
 
     search(searchStr, type, limit) {
 
@@ -17,7 +17,7 @@ export class SearchService {
             return this._authService.getEndPointHeaders().mergeMap( (headers) =>
                  this._http.get('https://api.spotify.com/v1/search?type=' + localType + '&q=' + searchStr.trim().replace(' ', '+') + '&limit=' + localLimit, 
                     {headers: headers})
-                        .map(res => res.json()));
+                        .map(res => res));
         }
     }
 
@@ -57,7 +57,7 @@ export class SearchService {
             
             return this._authService.getEndPointHeaders().mergeMap( (headers) =>
                     this._http.get(searchURL,{headers: headers})
-                .map(res => res.json()));
+                .map(res => res));
         }
         
     }

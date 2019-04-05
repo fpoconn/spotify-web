@@ -21,7 +21,7 @@ import {Router, RouterModule} from '@angular/router';
 
 export class HomeMyMusicComponent {
     
-    selectedTab: string = 'playlists';
+    selectedTab: string;  // = 'playlists';
     @ViewChild('playlists') playlists:ElementRef;
     @ViewChild('tracks') tracks:ElementRef;
     @ViewChild('albums') albums:ElementRef;
@@ -29,7 +29,7 @@ export class HomeMyMusicComponent {
 
     constructor(private _router: Router){}
 
-    ngAfterViewInit(){
+    ngAfterContentInit(){
         let storedTab = localStorage.getItem("mymusicTab");
         if(storedTab){
 
@@ -47,6 +47,9 @@ export class HomeMyMusicComponent {
             if(storedTab == 'artists'){
                 this.artists.nativeElement.click();
             }
+        }
+        else{
+            this.selectedTab = 'playlists';
         }
     }
 

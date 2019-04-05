@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpModule, Http, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable'; 
 
 @Injectable()
@@ -14,7 +14,8 @@ export class AuthService {
 
     scope: string = 'user-read-private playlist-read-private user-read-email user-library-read user-top-read user-follow-read';
     
-    constructor(private _http: Http) {}
+    constructor(private _http: HttpClient) {}
+
     getAuthorizeUrl(){
         return 'https://accounts.spotify.com/authorize?' +
             'response_type=code' +
@@ -80,8 +81,8 @@ export class AuthService {
 
         if (access_token === this.EXPIRED) {
             return this.refreshAccessToken().map(data => {
-                this.setAccessTokenData(data.json());
-                var headers = new Headers();
+                this.setAccessTokenData(data);
+                var headers = new HttpHeaders();
                 var token = this.getAccessToken();
                 headers.append('Authorization', 'Bearer '+ token);
 
@@ -90,9 +91,14 @@ export class AuthService {
         }
         else{
             return Observable.create(observer => {
-                var headers = new Headers();
-                headers.append('Authorization', 'Bearer '+ access_token);
+                //NOTE: Had to change how new HttpHeaders were created.
+               // var headers = new HttpHeaders();
+               // headers.append('Authorization', 'Bearer '+ access_token);
+               let headers = new HttpHeaders( 
+                   { 'Authorization' : 'Bearer '+ access_token }
+               );
                 observer.next(headers);
+
             }).map( data =>  data );
         }
     }

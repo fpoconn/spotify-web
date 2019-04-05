@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
 
             return this.authService.retrieveAccessToken().map(data => {
                 if(data){       
-                    this.authService.setAccessTokenData(data.json());
+                    this.authService.setAccessTokenData(data);
                     return true;
                 }
             });

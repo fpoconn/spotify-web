@@ -11,4 +11,5 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule, [spotRouterProviders, AuthService]);
+//platformBrowserDynamic().bootstrapModule(AppModule, { providers: [spotRouterProviders, AuthService] } );
+platformBrowserDynamic().bootstrapModule(AppModule);
