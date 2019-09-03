@@ -20,12 +20,12 @@ import {Router, RouterModule} from '@angular/router';
 })
 
 export class HomeMyMusicComponent {
-    
+
     selectedTab: string;  // = 'playlists';
-    @ViewChild('playlists') playlists:ElementRef;
-    @ViewChild('tracks') tracks:ElementRef;
-    @ViewChild('albums') albums:ElementRef;
-    @ViewChild('artists') artists:ElementRef;
+    @ViewChild('playlists', {static: true}) playlists:ElementRef;
+    @ViewChild('tracks', {static: true}) tracks:ElementRef;
+    @ViewChild('albums', {static: true}) albums:ElementRef;
+    @ViewChild('artists', {static: true}) artists:ElementRef;
 
     constructor(private _router: Router){}
 

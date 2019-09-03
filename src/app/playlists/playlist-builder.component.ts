@@ -70,11 +70,11 @@ export class PlaylistBuilderComponent  {
     selectedPlaylistTracks: any;
     selectedPlaylistTrackCount: number;
 
-    @ViewChild('tracks') tracks:ElementRef;
-    @ViewChild('playlistsElement') playlistsElement:ElementRef;
-    @ViewChild('recommendations') recommendations:ElementRef;
+    @ViewChild('tracks',{static: false}) tracks:ElementRef;
+    @ViewChild('playlistsElement',{static: false}) playlistsElement:ElementRef;
+    @ViewChild('recommendations',{static: false}) recommendations:ElementRef;
 
-    @ViewChild('dialogAnchor', {read: ViewContainerRef}) dialogAnchor: ViewContainerRef;
+    @ViewChild('dialogAnchor', {read: ViewContainerRef, static: false}) dialogAnchor: ViewContainerRef;
 
     constructor(private _playlistService: PlaylistService, private _userService: UserService,
                 private el: ElementRef, private renderer: Renderer,
