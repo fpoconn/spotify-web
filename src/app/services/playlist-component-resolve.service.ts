@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {PlaylistService} from "./playlist.service";
+import {mergeMap} from 'rxjs/operators';
 
 /**
  * Not currently used as there seems to be a problem with the Resolve continuing to page
@@ -15,6 +16,6 @@ export class PlaylistComponentResolve implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
         let id = route.params['id'];
         let ownerId = route.params['ownerId'];
-        return this.playlistService.playlistFromId(ownerId, id).mergeMap(res => res);
+        return this.playlistService.playlistFromId(ownerId, id).pipe(mergeMap(res => res));
     }
 }

@@ -29,7 +29,7 @@ import {SanitizeTrackUrl} from "../pipes";
 
 export class RelatedTracksComponent {
 
-    artistId: String;
+    artistId: string;
     relatedTracks: any;
     sub: any;
 

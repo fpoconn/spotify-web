@@ -5,6 +5,7 @@ import {SearchComponent} from "./search.component";
 import {ArtistListComponent} from "./artists/artist-list.component";
 import {AlbumListComponent} from "./albums/albums-list.component";
 import {PlaylistListComponent} from "./playlists/playlist-list.compoenent";
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'spot-results',
@@ -92,11 +93,11 @@ export class SearchResultsComponent implements OnInit {
     ngOnInit(){
 
         this._activatedRoute.params
-            .map(params => params['str'])
-            .map(str => {
+            .pipe(map(params => params['str']))
+            .pipe(map(str => {
                 this.searchString = str;
                 return this._searchService.search(str, null, 20);
-            })
+            }))
             .subscribe(
                 res => 
                     res.subscribe(res => {

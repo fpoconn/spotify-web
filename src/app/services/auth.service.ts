@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs/Observable'; 
+import { Observable } from 'rxjs'; 
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -80,16 +81,19 @@ export class AuthService {
         var access_token =  this.getAccessToken();
 
         if (access_token === this.EXPIRED) {
-            return this.refreshAccessToken().map(data => {
+
+            return this.refreshAccessToken().pipe(map(data => {
+
                 this.setAccessTokenData(data);
                 var headers = new HttpHeaders();
                 var token = this.getAccessToken();
                 headers.append('Authorization', 'Bearer '+ token);
 
                 return headers;
-            });
+            }));
         }
         else{
+
             return Observable.create(observer => {
                 //NOTE: Had to change how new HttpHeaders were created.
                // var headers = new HttpHeaders();
@@ -99,7 +103,7 @@ export class AuthService {
                );
                 observer.next(headers);
 
-            }).map( data =>  data );
+            }).pipe(map( data =>  data ));
         }
     }
 
@@ -117,7 +121,7 @@ export class AuthService {
             refresh_token: refreshToken,
             grant_type: 'refresh_token'
         };
-
+        console.log(this._http.post('/api/token', form));
         return this._http.post('/api/token', form);
     }
     

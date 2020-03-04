@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -20,12 +21,12 @@ export class AuthGuard implements CanActivate {
                 return true;
             }
 
-            return this.authService.retrieveAccessToken().map(data => {
+            return this.authService.retrieveAccessToken().pipe(map(data => {
                 if(data){       
                     this.authService.setAccessTokenData(data);
                     return true;
                 }
-            });
+            }));
             
         }
         else{

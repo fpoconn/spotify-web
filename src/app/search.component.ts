@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges,ViewChild } from '@angular/core';
 import {SearchService} from './services/search.service';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+import {debounceTime} from 'rxjs/internal/operators';
+import { distinctUntilChanged } from 'rxjs/operators'
 
 @Component({
     selector: 'spot-search-field',
@@ -23,7 +23,7 @@ export class SearchComponent implements OnChanges {
 
     constructor( private _searchService: SearchService){
 
-       this.searchTextControl.valueChanges.debounceTime(1000).distinctUntilChanged()//this.searchTextControl.valueChanges
+       this.searchTextControl.valueChanges.pipe(debounceTime(1000), distinctUntilChanged())//this.searchTextControl.valueChanges
             .subscribe((st: string) => {
                 this.resultEvent.emit({ s : st });
                 if(this.isNavBar){

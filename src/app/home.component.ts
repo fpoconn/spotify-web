@@ -20,7 +20,9 @@ export class HomeComponent {
             this.currentUser = res;
             localStorage.setItem("currentUser", JSON.stringify(res));
         },
-        err => console.log(err));
+        err => {
+            return console.log(err);
+        });
     }
 
     setResults(resEvent) {

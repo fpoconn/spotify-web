@@ -1,7 +1,8 @@
 import {Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, RouterModule} from '@angular/router';
 import {PlaylistService} from "../services/playlist.service";
-import 'rxjs/add/operator/mergeMap';
+import 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -40,13 +41,13 @@ export class PlaylistComponent implements OnInit {
     ngOnInit() {
 
         this._activatedRoute.params
-            .map(params => {
+            .pipe(map(params => {
 
                 let ownerId = params['ownerId'];
                 let playlistId = params['id'];
                 return this._playlistService.playlistFromId(ownerId, playlistId);
                    
-            }).subscribe( playlistObs => {
+            })).subscribe( playlistObs => {
 
                 playlistObs.subscribe( playlist => {
 

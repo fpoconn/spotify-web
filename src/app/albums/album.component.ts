@@ -2,6 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, RouterModule} from '@angular/router';
 import {AlbumService} from "../services/album.service";
 import {FormatGenres} from "../pipes";
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'spot-album',
@@ -41,11 +42,11 @@ export class AlbumComponent implements OnInit {
 
     ngOnInit() {
 
-        this._activatedRoute.params.map( data => {
+        this._activatedRoute.params.pipe(map( data => {
 
             return this._albumService.albumFromId(data['id']);
             
-        }).subscribe( albumObs => {
+        })).subscribe( albumObs => {
             albumObs.subscribe(album => {
 
                 this.album = album;

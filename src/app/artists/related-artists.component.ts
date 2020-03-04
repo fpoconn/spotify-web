@@ -24,7 +24,7 @@ import {ArtistListComponent} from "./artist-list.component";
 
 export class RelatedArtistsComponent {
 
-    artistId: String;
+    artistId: string;
     relatedArtists: any;
     sub: any;
 

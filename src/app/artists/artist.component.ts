@@ -4,11 +4,12 @@ import {ArtistService} from "../services/artist.service";
 import {spotRouterProviders} from '../spot-routers';
 import {FormatGenres} from "../pipes";
 import {ResolveData} from "@angular/router";
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'spot-artist',
     template: `
-    <div>
+    <div *ngIf="artist">
         <div *ngIf="artist.images">
             <img src="{{artist.images[0].url}}" width="250" height="250"/>
         </div>
@@ -58,9 +59,9 @@ export class ArtistComponent implements OnInit {
             this.selectedTab = storedTab;
         }
 
-            this._activatedRoute.params.map( data => {
+            this._activatedRoute.params.pipe(map( data => {
                 return this._artistService.artistFromId(data['id']);
-            }).subscribe( artistObs => {
+            })).subscribe( artistObs => {
                 artistObs.subscribe(artist => {
                     this.artist = artist;
 
@@ -70,7 +71,7 @@ export class ArtistComponent implements OnInit {
 
     }
 
-    selectTab(tabId){
+    selectTab(tabId: string){
 
         this.selectedTab = tabId;
         localStorage.setItem("artistTab", tabId);

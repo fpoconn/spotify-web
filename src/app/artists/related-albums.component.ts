@@ -24,7 +24,7 @@ import {AlbumListComponent} from '../albums/albums-list.component';
 
 export class RelatedAlbumsComponent {
 
-    artistId: String;
+    artistId: string;
     relatedAlbums: any;
     sub: any;
 

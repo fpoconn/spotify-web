@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './auth.service';
-import 'rxjs/add/operator/map';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class BrowseService {
@@ -10,30 +10,30 @@ export class BrowseService {
 
     getFeaturedPlaylists(){
 
-        return this._authService.getEndPointHeaders().mergeMap( (headers: HttpHeaders) => 
+        return this._authService.getEndPointHeaders().pipe(mergeMap( (headers: HttpHeaders) => 
          this._http.get('https://api.spotify.com/v1/browse/featured-playlists?country=CA', {headers: headers})
-                .map(res => res));
+                .pipe(map(res => res))));
     }
 
     getNewReleases(){
 
-        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+        return this._authService.getEndPointHeaders().pipe(mergeMap( (headers: HttpHeaders) =>
             this._http.get('https://api.spotify.com/v1/browse/new-releases', {headers: headers})
-                .map(res => res));
+                .pipe(map(res => res))));
     }
 
     getCategories(){
 
-        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+        return this._authService.getEndPointHeaders().pipe(mergeMap( (headers: HttpHeaders) =>
             this._http.get('https://api.spotify.com/v1/browse/categories', {headers: headers})
-                .map(res => res));
+                .pipe(map(res => res))));
     }
 
     getCategoryPlaylists(category_id: string){
 
-        return this._authService.getEndPointHeaders().mergeMap( (headers) =>
+        return this._authService.getEndPointHeaders().pipe(mergeMap( (headers: HttpHeaders) =>
             this._http.get('https://api.spotify.com/v1/browse/categories/' + category_id + '/playlists', {headers: headers})
-                .map(res => res));
+                .pipe(map(res => res))));
     }
 
 }
