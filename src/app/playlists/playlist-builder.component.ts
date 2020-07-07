@@ -1,4 +1,4 @@
-import {Component, EventEmitter, ElementRef, Renderer, ViewChild, ComponentFactoryResolver, ViewContainerRef} from '@angular/core';
+import { Component, EventEmitter, ElementRef, ViewChild, ComponentFactoryResolver, ViewContainerRef, Renderer2 } from '@angular/core';
 import {PlaylistService} from "../services/playlist.service";
 import {UserService} from "../services/user.service";
 import {TrackInfo} from "../builder/track-info.component";
@@ -70,14 +70,14 @@ export class PlaylistBuilderComponent  {
     selectedPlaylistTracks: any;
     selectedPlaylistTrackCount: number;
 
-    @ViewChild('tracks',{static: false}) tracks:ElementRef;
-    @ViewChild('playlistsElement',{static: false}) playlistsElement:ElementRef;
-    @ViewChild('recommendations',{static: false}) recommendations:ElementRef;
+    @ViewChild('tracks') tracks:ElementRef;
+    @ViewChild('playlistsElement') playlistsElement:ElementRef;
+    @ViewChild('recommendations') recommendations:ElementRef;
 
-    @ViewChild('dialogAnchor', {read: ViewContainerRef, static: false}) dialogAnchor: ViewContainerRef;
+    @ViewChild('dialogAnchor', { read: ViewContainerRef }) dialogAnchor: ViewContainerRef;
 
     constructor(private _playlistService: PlaylistService, private _userService: UserService,
-                private el: ElementRef, private renderer: Renderer,
+                private el: ElementRef, private renderer: Renderer2,
                 private componentFactoryResolver: ComponentFactoryResolver) {
 
         let userId = JSON.parse(localStorage.getItem("currentUser")).id;

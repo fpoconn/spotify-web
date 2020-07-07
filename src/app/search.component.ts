@@ -19,7 +19,7 @@ export class SearchComponent implements OnChanges {
     @Input() isNavBar: boolean = false;
     inputSize : number;
 
-    @ViewChild('search',{static: false}) vChild;
+    @ViewChild('search') vChild;
 
     constructor( private _searchService: SearchService){
 

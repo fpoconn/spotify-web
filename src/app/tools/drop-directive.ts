@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer, Output, EventEmitter} from '@angular/core';
+import { Directive, ElementRef, Output, EventEmitter, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: '[myDroppable]',
@@ -13,7 +13,7 @@ export class DropDirective {
     
     @Output() dropped: EventEmitter<any> = new EventEmitter();
 
-    constructor(private renderer: Renderer, private _elemenetRef: ElementRef) {}
+    constructor(private renderer: Renderer2, private _elemenetRef: ElementRef) {}
 
     onDragOver(ev){
 
