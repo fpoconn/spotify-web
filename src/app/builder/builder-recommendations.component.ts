@@ -123,7 +123,7 @@ export class BuilderRecommendations {
                     this.waiting = false;
 
                 },
-                err => console.log("error: " + err),
+                err => console.log("error searching recommendations: " + err),
                 () => console.log("Music loaded.")
             );
     }
