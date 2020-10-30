@@ -160,7 +160,12 @@ export class PlaylistBuilderComponent  {
                     this.getPlaylistTracks();
                 }
                 ,
-                err => console.log("error: " + err),
+               
+                    err => {
+                        console.log("error adding track: " + err);
+                        console.log(err);
+                    }
+                ,
                 () => console.log("TRACK ADDED TO PLAYLIST")
                 )  
 

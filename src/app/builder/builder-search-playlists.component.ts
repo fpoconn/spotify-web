@@ -49,6 +49,7 @@ export class BuilderSearchPlaylists {
 
     tracks: any;
     waiting: boolean = false;
+    disableForm: boolean = false;
 
     formModel = {
         searchString: undefined,

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges,ViewChild } from '@angular/core';
 import {SearchService} from './services/search.service';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {debounceTime} from 'rxjs/internal/operators';
+import {debounceTime} from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators'
 
 @Component({

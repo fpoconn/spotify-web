@@ -1,4 +1,3 @@
-@Injectable()
 import {provideRoutes, Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home.component';
 import {SearchResultsComponent} from './search-results.component';

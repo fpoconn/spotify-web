@@ -36,6 +36,7 @@ export class BuilderSearchTracks {
 
     searchString: string;
     tracks: any;
+    disableForm: boolean = false;
 
     constructor(private _searchService: SearchService){}
 

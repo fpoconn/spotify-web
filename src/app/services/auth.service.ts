@@ -13,7 +13,7 @@ export class AuthService {
 
     token_url: string = 'https://accounts.spotify.com/api/token';
 
-    scope: string = 'user-read-private playlist-read-private user-read-email user-library-read user-top-read user-follow-read';
+    scope: string = 'user-read-private playlist-read-private playlist-modify-public user-read-email user-library-read user-top-read user-follow-read';
     
     constructor(private _http: HttpClient) {}
 
