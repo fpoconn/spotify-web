@@ -71,4 +71,4 @@ export const spotRouterProviders = [
     provideRoutes(spotRouters)
 ];
 
-export const routing = RouterModule.forRoot(spotRouters);
+export const routing = RouterModule.forRoot(spotRouters, { relativeLinkResolution: 'legacy' });
